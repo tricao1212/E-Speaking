@@ -3,6 +3,7 @@ using E_Speaking.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Speaking.Migrations
 {
     [DbContext(typeof(E_SpeakingContext))]
-    partial class E_SpeakingContextModelSnapshot : ModelSnapshot
+    [Migration("20240123062631_adjust")]
+    partial class adjust
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,7 +107,7 @@ namespace E_Speaking.Migrations
             modelBuilder.Entity("E_Speaking.Models.Sentence", b =>
                 {
                     b.HasOne("E_Speaking.Models.Difficulty", "Difficulty")
-                        .WithMany("Sentences")
+                        .WithMany()
                         .HasForeignKey("DifficultyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -115,19 +118,12 @@ namespace E_Speaking.Migrations
             modelBuilder.Entity("E_Speaking.Models.Word", b =>
                 {
                     b.HasOne("E_Speaking.Models.Difficulty", "Difficulty")
-                        .WithMany("Words")
+                        .WithMany()
                         .HasForeignKey("DifficultyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Difficulty");
-                });
-
-            modelBuilder.Entity("E_Speaking.Models.Difficulty", b =>
-                {
-                    b.Navigation("Sentences");
-
-                    b.Navigation("Words");
                 });
 #pragma warning restore 612, 618
         }

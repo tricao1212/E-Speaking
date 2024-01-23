@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace E_Speaking.Models
 {
-    public class Word_Lesson
+    public class Word
     {
         public int Id { get; set; }
 
@@ -11,9 +11,9 @@ namespace E_Speaking.Models
         [MaxLength(20)]
         public string Content { get; set; }
 
-        [ForeignKey(nameof(Level))]
-        public int LevelId { get; set; }
-        public Level Level { get; set; }
+        [ForeignKey(nameof(Difficulty))]
+        public int DifficultyId { get; set; }
+        public Difficulty Difficulty { get; set; }
 
     }
 }

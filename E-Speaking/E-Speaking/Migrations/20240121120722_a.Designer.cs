@@ -3,6 +3,7 @@ using E_Speaking.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Speaking.Migrations
 {
     [DbContext(typeof(E_SpeakingContext))]
-    partial class E_SpeakingContextModelSnapshot : ModelSnapshot
+    [Migration("20240121120722_a")]
+    partial class a
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,23 +23,6 @@ namespace E_Speaking.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("E_Speaking.Models.Difficulty", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Difficulty");
-                });
 
             modelBuilder.Entity("E_Speaking.Models.Level", b =>
                 {
@@ -55,7 +41,7 @@ namespace E_Speaking.Migrations
                     b.ToTable("Level");
                 });
 
-            modelBuilder.Entity("E_Speaking.Models.Sentence", b =>
+            modelBuilder.Entity("E_Speaking.Models.Sentence_Lesson", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -68,17 +54,17 @@ namespace E_Speaking.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("DifficultyId")
+                    b.Property<int>("LevelId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DifficultyId");
+                    b.HasIndex("LevelId");
 
-                    b.ToTable("Sentence");
+                    b.ToTable("Sentence_Lesson");
                 });
 
-            modelBuilder.Entity("E_Speaking.Models.Word", b =>
+            modelBuilder.Entity("E_Speaking.Models.Word_Lesson", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -91,43 +77,36 @@ namespace E_Speaking.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("DifficultyId")
+                    b.Property<int>("LevelId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DifficultyId");
+                    b.HasIndex("LevelId");
 
-                    b.ToTable("Word");
+                    b.ToTable("Word_Lesson");
                 });
 
-            modelBuilder.Entity("E_Speaking.Models.Sentence", b =>
+            modelBuilder.Entity("E_Speaking.Models.Sentence_Lesson", b =>
                 {
-                    b.HasOne("E_Speaking.Models.Difficulty", "Difficulty")
-                        .WithMany("Sentences")
-                        .HasForeignKey("DifficultyId")
+                    b.HasOne("E_Speaking.Models.Level", "Level")
+                        .WithMany()
+                        .HasForeignKey("LevelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Difficulty");
+                    b.Navigation("Level");
                 });
 
-            modelBuilder.Entity("E_Speaking.Models.Word", b =>
+            modelBuilder.Entity("E_Speaking.Models.Word_Lesson", b =>
                 {
-                    b.HasOne("E_Speaking.Models.Difficulty", "Difficulty")
-                        .WithMany("Words")
-                        .HasForeignKey("DifficultyId")
+                    b.HasOne("E_Speaking.Models.Level", "Level")
+                        .WithMany()
+                        .HasForeignKey("LevelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Difficulty");
-                });
-
-            modelBuilder.Entity("E_Speaking.Models.Difficulty", b =>
-                {
-                    b.Navigation("Sentences");
-
-                    b.Navigation("Words");
+                    b.Navigation("Level");
                 });
 #pragma warning restore 612, 618
         }

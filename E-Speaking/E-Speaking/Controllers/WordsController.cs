@@ -12,47 +12,47 @@ namespace E_Speaking.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Word_LessonController : ControllerBase
+    public class WordsController : ControllerBase
     {
         private readonly E_SpeakingContext _context;
 
-        public Word_LessonController(E_SpeakingContext context)
+        public WordsController(E_SpeakingContext context)
         {
             _context = context;
         }
 
-        // GET: api/Word_Lesson
+        // GET: api/Words
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Word_Lesson>>> GetWord_Lesson()
+        public async Task<ActionResult<IEnumerable<Word>>> GetWord()
         {
-            return await _context.Word_Lesson.ToListAsync();
+            return await _context.Word.ToListAsync();
         }
 
-        // GET: api/Word_Lesson/5
+        // GET: api/Words/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Word_Lesson>> GetWord_Lesson(int id)
+        public async Task<ActionResult<Word>> GetWord(int id)
         {
-            var word_Lesson = await _context.Word_Lesson.FindAsync(id);
+            var word = await _context.Word.FindAsync(id);
 
-            if (word_Lesson == null)
+            if (word == null)
             {
                 return NotFound();
             }
 
-            return word_Lesson;
+            return word;
         }
 
-        // PUT: api/Word_Lesson/5
+        // PUT: api/Words/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutWord_Lesson(int id, Word_Lesson word_Lesson)
+        public async Task<IActionResult> PutWord(int id, Word word)
         {
-            if (id != word_Lesson.Id)
+            if (id != word.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(word_Lesson).State = EntityState.Modified;
+            _context.Entry(word).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace E_Speaking.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!Word_LessonExists(id))
+                if (!WordExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace E_Speaking.Controllers
             return NoContent();
         }
 
-        // POST: api/Word_Lesson
+        // POST: api/Words
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Word_Lesson>> PostWord_Lesson(Word_Lesson word_Lesson)
+        public async Task<ActionResult<Word>> PostWord(Word word)
         {
-            _context.Word_Lesson.Add(word_Lesson);
+            _context.Word.Add(word);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetWord_Lesson", new { id = word_Lesson.Id }, word_Lesson);
+            return CreatedAtAction("GetWord", new { id = word.Id }, word);
         }
 
-        // DELETE: api/Word_Lesson/5
+        // DELETE: api/Words/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteWord_Lesson(int id)
+        public async Task<IActionResult> DeleteWord(int id)
         {
-            var word_Lesson = await _context.Word_Lesson.FindAsync(id);
-            if (word_Lesson == null)
+            var word = await _context.Word.FindAsync(id);
+            if (word == null)
             {
                 return NotFound();
             }
 
-            _context.Word_Lesson.Remove(word_Lesson);
+            _context.Word.Remove(word);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool Word_LessonExists(int id)
+        private bool WordExists(int id)
         {
-            return _context.Word_Lesson.Any(e => e.Id == id);
+            return _context.Word.Any(e => e.Id == id);
         }
     }
 }

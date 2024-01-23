@@ -14,11 +14,11 @@ namespace E_Speaking.Data
         {
         }
 
-        public DbSet<E_Speaking.Models.Word_Lesson> Word_Lesson { get; set; } = default!;
+        public DbSet<E_Speaking.Models.Word> Word { get; set; } = default!;
 
         public DbSet<E_Speaking.Models.Level> Level { get; set; }
 
-        public DbSet<E_Speaking.Models.Sentence_Lesson> Sentence_Lesson { get; set; }
+        public DbSet<E_Speaking.Models.Sentence> Sentence { get; set; }
 
         public DbSet<E_Speaking.Models.Difficulty> Difficulty { get; set; }
     }
