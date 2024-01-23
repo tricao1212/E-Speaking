@@ -1,0 +1,7 @@
+.menuItems {
+    flex-direction: row;
+}
+.menuItem {
+    padding: 10px;
+    display: inline-block;
+}
