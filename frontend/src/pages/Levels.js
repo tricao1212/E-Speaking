@@ -1,7 +1,19 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Button, Container, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
+import styles from "../styles/buttons.module.css";
+import { ConfirmToast } from "react-confirm-toast";
 const Levels = () => {
+    const [levels, setLevels] = useState([]);
+
+    useEffect(() => {
+        axios.get("https://localhost:7149/api/levels")
+        .then(response => setLevels(response.data));
+    },[])
+    const handleDelete = () => {
+        
+    }
     return (
         <Container>
             <Button variant="outline-primary" as={Link} to={'../levels/add'}>Add</Button>
@@ -14,14 +26,28 @@ const Levels = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Beginner</td>
-                        <td>
-                            <Button variant="outline-warning" as={Link} to={'../levels/edit'}>Edit</Button>
-                            <Button variant="outline-danger" onClick={()=>{}}>Delete</Button>
-                        </td>
-                    </tr>
+                    {levels.map((item, index)=>(
+                        <tr key={item.id}>
+                            <td>{index+1}</td>
+                            <td>{item.type}</td>
+                            <td className={styles.btn2}>
+                                <Button variant="outline-warning" as={Link} to={'../levels/edit'} state={{data: item}}>Edit</Button>
+                                <ConfirmToast
+                                    asModal={true}
+                                    customCancel={'No'}
+                                    customConfirm={'Yes'}
+                                    customFunction={handleDelete}
+                                    message={'Do you want to continue and execute the function?'}
+                                    position={'top-left'}
+                                    showCloseIcon={false}
+                                    theme={'light'}
+                                >
+                                    <Button variant="outline-danger">Delete</Button>
+                                </ConfirmToast>
+                            </td>
+                        </tr>
+                    ))}
+                    
                 </tbody>
             </Table>
         </Container>

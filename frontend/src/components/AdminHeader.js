@@ -5,7 +5,7 @@ const AdminHeader = () => {
             <header>
                 <nav>
                     <div className={styles.logofield}>
-                        <img className={styles.logo} src="../logo192.png"/>
+                        <img className={styles.logo} src="../logo192.png" alt=''/>
                         <h5>E-Speaking</h5>
                     </div>
                 </nav>

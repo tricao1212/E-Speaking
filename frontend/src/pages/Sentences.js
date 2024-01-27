@@ -1,9 +1,19 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import {Table ,Container, Button} from "react-bootstrap";
+import { ConfirmToast } from "react-confirm-toast";
 import { Link } from "react-router-dom";
-
+import styles from "../styles/buttons.module.css";
 const Sentences = () => {
+    const [sentences, setSentences] = useState([]);
+    useEffect(() => {
+        axios.get("https://localhost:7149/api/sentences")
+        .then(response => {
+            setSentences(response.data);
+        })
+    },[])
     const handleDelete = () => {
-        window.confirm("Are you sure?")
+        
     }
     return (
         <Container>
@@ -19,16 +29,29 @@ const Sentences = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>The fox jumps over the lazy dogs</td>
-                        <td>easy</td>
-                        <td>3</td>
-                        <td>
-                            <Button variant="outline-warning" as={Link} to={'../sentences/edit'}>Edit</Button>
-                            <Button variant="outline-danger" onClick={handleDelete}>Delete</Button>
-                        </td>
-                    </tr>
+                    {sentences.map((item, index) => (
+                        <tr key={index}>
+                            <td>{index+1}</td>
+                            <td>{item.content}</td>
+                            <td>{item.difficulty.type}</td>
+                            <td>3</td>
+                            <td className={styles.btn2}>
+                                <Button variant="outline-warning" as={Link} to={'../sentences/edit'} state={{data: item}}>Edit</Button>
+                                <ConfirmToast
+                                    asModal={true}
+                                    customCancel={'No'}
+                                    customConfirm={'Yes'}
+                                    customFunction={handleDelete}
+                                    message={'Do you want to continue and execute the function?'}
+                                    position={'top-left'}
+                                    showCloseIcon={false}
+                                    theme={'light'}
+                                >
+                                    <Button variant="outline-danger">Delete</Button>
+                                </ConfirmToast>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </Table>
         </Container>

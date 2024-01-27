@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using E_Speaking.Data;
 using E_Speaking.Models;
+using NuGet.Versioning;
 
 namespace E_Speaking.Controllers
 {
@@ -25,14 +26,14 @@ namespace E_Speaking.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Word>>> GetWord()
         {
-            return await _context.Word.ToListAsync();
+            return await _context.Word.Include(x=>x.Difficulty).ToListAsync();
         }
 
         // GET: api/Words/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Word>> GetWord(int id)
         {
-            var word = await _context.Word.FindAsync(id);
+            var word = await _context.Word.Include(x => x.Difficulty).FirstOrDefaultAsync(x => x.Id == id);
 
             if (word == null)
             {

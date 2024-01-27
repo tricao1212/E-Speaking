@@ -25,14 +25,14 @@ namespace E_Speaking.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Sentence>>> GetSentence()
         {
-            return await _context.Sentence.ToListAsync();
+            return await _context.Sentence.Include(x=>x.Difficulty).ToListAsync();
         }
 
         // GET: api/Sentences/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Sentence>> GetSentence(int id)
         {
-            var sentence = await _context.Sentence.FindAsync(id);
+            var sentence = await _context.Sentence.Include(x => x.Difficulty).FirstOrDefaultAsync(x => x.Id == id);
 
             if (sentence == null)
             {

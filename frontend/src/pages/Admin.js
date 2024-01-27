@@ -13,6 +13,8 @@ import Levels from "./Levels"
 import Difficulties from "./Difficulties"
 import AddDifficulty from "./AddDifficulty"
 import AddLevel from "./AddLevel"
+import EditDifficulty from "./EditDifficulty"
+import EditLevel from "./EditLevel"
 
 const Admin = () => {
     return (
@@ -34,10 +36,10 @@ const Admin = () => {
                             <Route path="/sentences/edit" element={<EditSentence/>} />
                             <Route path="/levels" element={<Levels/>} />
                             <Route path="/levels/add" element={<AddLevel/>} />
-                            <Route path="/levels/edit" element={<EditSentence/>} />
+                            <Route path="/levels/edit" element={<EditLevel/>} />
                             <Route path="/difficulties" element={<Difficulties/>} />
                             <Route path="/difficulties/add" element={<AddDifficulty/>} />
-                            <Route path="/difficulties/edit" element={<EditSentence/>} />
+                            <Route path="/difficulties/edit" element={<EditDifficulty/>} />
                         </Routes>
                     </Col>
                 </Row>
