@@ -12,46 +12,47 @@ namespace E_Speaking.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SentencesController : ControllerBase
+    public class Word_LessonController : ControllerBase
     {
         private readonly E_SpeakingContext _context;
 
-        public SentencesController(E_SpeakingContext context)
+        public Word_LessonController(E_SpeakingContext context)
         {
             _context = context;
         }
 
-        // GET: api/Sentences
+        // GET: api/Word_Lesson
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Sentence>>> GetSentence()
+        public async Task<ActionResult<IEnumerable<Word_Lesson>>> GetWord_Lesson()
         {
-            return await _context.Sentence.Include(x => x.Difficulty).ToListAsync();
+            return await _context.Word_Lesson.ToListAsync();
         }
-        // GET: api/Sentences/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Sentence>> GetSentence(int id)
-        {
-            var sentence = await _context.Sentence.Include(x => x.Difficulty).FirstOrDefaultAsync(x => x.Id == id);
 
-            if (sentence == null)
+        // GET: api/Word_Lesson/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<List<Word_Lesson>>> GetWord_Lesson(int diffId)
+        {
+            var word_Lesson = await _context.Word_Lesson.Where(x => x.DifficultyId == diffId).ToListAsync();
+
+            if (word_Lesson == null)
             {
                 return NotFound();
             }
 
-            return sentence;
+            return word_Lesson;
         }
 
-        // PUT: api/Sentences/5
+        // PUT: api/Word_Lesson/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSentence(int id, Sentence sentence)
+        public async Task<IActionResult> PutWord_Lesson(int id, Word_Lesson word_Lesson)
         {
-            if (id != sentence.Id)
+            if (id != word_Lesson.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(sentence).State = EntityState.Modified;
+            _context.Entry(word_Lesson).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +60,7 @@ namespace E_Speaking.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SentenceExists(id))
+                if (!Word_LessonExists(id))
                 {
                     return NotFound();
                 }
@@ -72,36 +73,36 @@ namespace E_Speaking.Controllers
             return NoContent();
         }
 
-        // POST: api/Sentences
+        // POST: api/Word_Lesson
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Sentence>> PostSentence(Sentence sentence)
+        public async Task<ActionResult<Word_Lesson>> PostWord_Lesson(Word_Lesson word_Lesson)
         {
-            _context.Sentence.Add(sentence);
+            _context.Word_Lesson.Add(word_Lesson);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSentence", new { id = sentence.Id }, sentence);
+            return CreatedAtAction("GetWord_Lesson", new { id = word_Lesson.Id }, word_Lesson);
         }
 
-        // DELETE: api/Sentences/5
+        // DELETE: api/Word_Lesson/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSentence(int id)
+        public async Task<IActionResult> DeleteWord_Lesson(int id)
         {
-            var sentence = await _context.Sentence.FindAsync(id);
-            if (sentence == null)
+            var word_Lesson = await _context.Word_Lesson.FindAsync(id);
+            if (word_Lesson == null)
             {
                 return NotFound();
             }
 
-            _context.Sentence.Remove(sentence);
+            _context.Word_Lesson.Remove(word_Lesson);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool SentenceExists(int id)
+        private bool Word_LessonExists(int id)
         {
-            return _context.Sentence.Any(e => e.Id == id);
+            return _context.Word_Lesson.Any(e => e.Id == id);
         }
     }
 }
