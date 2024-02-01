@@ -32,7 +32,7 @@ namespace E_Speaking.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Difficulty>> GetDifficulty(int id)
         {
-            var difficulty = await _context.Difficulty.FindAsync(id);
+            var difficulty = await _context.Difficulty.FirstOrDefaultAsync(m => m.Id == id);
 
             if (difficulty == null)
             {

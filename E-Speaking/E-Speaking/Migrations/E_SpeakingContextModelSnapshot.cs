@@ -123,6 +123,25 @@ namespace E_Speaking.Migrations
                     b.ToTable("Word");
                 });
 
+            modelBuilder.Entity("E_Speaking.Models.Word_Lesson", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DifficultyId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WordId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Word_Lesson");
+                });
+
             modelBuilder.Entity("E_Speaking.Models.Sentence", b =>
                 {
                     b.HasOne("E_Speaking.Models.Difficulty", "Difficulty")

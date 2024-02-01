@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Speaking.Migrations
 {
     [DbContext(typeof(E_SpeakingContext))]
-    [Migration("20240123062631_adjust")]
-    partial class adjust
+    [Migration("20240123084446_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

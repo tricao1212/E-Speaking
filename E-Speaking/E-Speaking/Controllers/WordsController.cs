@@ -52,11 +52,14 @@ namespace E_Speaking.Controllers
             {
                 return BadRequest();
             }
-
+           
             _context.Entry(word).State = EntityState.Modified;
 
             try
             {
+                var wl = await _context.Word_Lesson.Where(x => x.WordId == id).FirstAsync();
+                wl.DifficultyId = word.DifficultyId;
+
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -79,7 +82,12 @@ namespace E_Speaking.Controllers
         [HttpPost]
         public async Task<ActionResult<Word>> PostWord(Word word)
         {
+            Word_Lesson wl = new Word_Lesson();
+            wl.DifficultyId = word.DifficultyId;
             _context.Word.Add(word);
+            await _context.SaveChangesAsync();
+            wl.WordId = word.Id;
+            _context.Word_Lesson.Add(wl);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetWord", new { id = word.Id }, word);
@@ -94,7 +102,8 @@ namespace E_Speaking.Controllers
             {
                 return NotFound();
             }
-
+            var wl = await _context.Word_Lesson.Where(x => x.WordId == id).FirstAsync();
+            _context.Word_Lesson.Remove(wl);
             _context.Word.Remove(word);
             await _context.SaveChangesAsync();
 

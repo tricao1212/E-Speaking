@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Speaking.Migrations
 {
     [DbContext(typeof(E_SpeakingContext))]
-    [Migration("20240123064133_addDiff")]
-    partial class addDiff
+    [Migration("20240123084628_wl")]
+    partial class wl
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,10 +104,29 @@ namespace E_Speaking.Migrations
                     b.ToTable("Word");
                 });
 
+            modelBuilder.Entity("E_Speaking.Models.Word_Lesson", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DifficultyId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WordId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Word_Lesson");
+                });
+
             modelBuilder.Entity("E_Speaking.Models.Sentence", b =>
                 {
                     b.HasOne("E_Speaking.Models.Difficulty", "Difficulty")
-                        .WithMany("Sentences")
+                        .WithMany()
                         .HasForeignKey("DifficultyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -118,19 +137,12 @@ namespace E_Speaking.Migrations
             modelBuilder.Entity("E_Speaking.Models.Word", b =>
                 {
                     b.HasOne("E_Speaking.Models.Difficulty", "Difficulty")
-                        .WithMany("Words")
+                        .WithMany()
                         .HasForeignKey("DifficultyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Difficulty");
-                });
-
-            modelBuilder.Entity("E_Speaking.Models.Difficulty", b =>
-                {
-                    b.Navigation("Sentences");
-
-                    b.Navigation("Words");
                 });
 #pragma warning restore 612, 618
         }
