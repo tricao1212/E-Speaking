@@ -23,7 +23,7 @@ const EditSentence = () => {
             content: sentence,
             difficultyId: difficulty
         }
-        axios.put("https://localhost:7149/api/sentences/"+data.id, newSentence)
+        axios.put("http://localhost:5000/api/sentences/"+data.id, newSentence)
         .then(response => {
             console.log(response.data);
         })

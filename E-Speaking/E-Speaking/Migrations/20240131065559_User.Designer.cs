@@ -3,6 +3,7 @@ using E_Speaking.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Speaking.Migrations
 {
     [DbContext(typeof(E_SpeakingContext))]
-    partial class E_SpeakingContextModelSnapshot : ModelSnapshot
+    [Migration("20240131065559_User")]
+    partial class User
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,7 +83,7 @@ namespace E_Speaking.Migrations
 
             modelBuilder.Entity("E_Speaking.Models.User", b =>
                 {
-                    b.Property<string>("UID")
+                    b.Property<string>("Token")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Avatar")
@@ -95,7 +98,7 @@ namespace E_Speaking.Migrations
                     b.Property<int>("Role")
                         .HasColumnType("int");
 
-                    b.HasKey("UID");
+                    b.HasKey("Token");
 
                     b.ToTable("User");
                 });

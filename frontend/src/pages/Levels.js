@@ -6,13 +6,16 @@ import styles from "../styles/buttons.module.css";
 import { ConfirmToast } from "react-confirm-toast";
 const Levels = () => {
     const [levels, setLevels] = useState([]);
-
-    useEffect(() => {
-        axios.get("https://localhost:7149/api/levels")
+    const fetchData = () => {
+        axios.get("http://localhost:5000/api/levels")
         .then(response => setLevels(response.data));
+    }
+    useEffect(() => {
+        fetchData();
     },[])
-    const handleDelete = () => {
-        
+    const handleDelete =async (id) => {
+        await axios.delete("http://localhost:5000/api/levels/"+id);
+        fetchData();
     }
     return (
         <Container>
@@ -36,7 +39,7 @@ const Levels = () => {
                                     asModal={true}
                                     customCancel={'No'}
                                     customConfirm={'Yes'}
-                                    customFunction={handleDelete}
+                                    customFunction={()=>handleDelete(item.id)}
                                     message={'Do you want to continue and execute the function?'}
                                     position={'top-left'}
                                     showCloseIcon={false}
@@ -47,7 +50,6 @@ const Levels = () => {
                             </td>
                         </tr>
                     ))}
-                    
                 </tbody>
             </Table>
         </Container>
