@@ -23,14 +23,15 @@ export const AuthContextProvider = ({children}) => {
             role: 2
         }
         await axios.post('http://localhost:5000/api/auth', newUser)
-                .then(response => console.log(response))
+                .then(response => console.log(response.data))
                 .catch(e=>console.log(e))
     }
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
-            console.log(currentUser);
-            postUser(currentUser);
+            if (currentUser!=null){
+                postUser(currentUser);
+            }
         });
         return () => {
             unsubscribe();
