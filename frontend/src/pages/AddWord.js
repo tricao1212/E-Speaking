@@ -9,7 +9,7 @@ const AddWord = () => {
     const [difficulty, setDifficulty] = useState(0)
     const navigate = useNavigate();
     useEffect(() => {
-        axios.get("https://localhost:7149/api/difficulties")
+        axios.get("http://localhost:5000/api/difficulties")
         .then(response => {
             setDifficulties(response.data);
         })
@@ -20,7 +20,7 @@ const AddWord = () => {
             content: word,
             difficultyId: difficulty
         }
-        axios.post("https://localhost:7149/api/words",newSentence)
+        axios.post("http://localhost:5000/api/words",newSentence)
         .then(response => {
             console.log(response.data);
         })

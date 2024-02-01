@@ -3,17 +3,20 @@ import { useEffect, useState } from "react";
 import {Table ,Container, Button} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styles from "../styles/buttons.module.css";
-import { ConfirmToast } from "react-confirm-toast";
 const Words = () => {
     const [words, setWords] = useState([]);
-    useEffect(() => {
-        axios.get("https://localhost:7149/api/words")
+    const fetchData = () => {
+        axios.get("http://localhost:5000/api/words")
         .then(response => {
             setWords(response.data);
         })
+    }
+    useEffect(() => {
+        fetchData();
     },[])
-    const handleDelete = () => {
-        window.confirm("Are you sure?")
+    const handleDelete =async (id) => {
+        await axios.delete("http://localhost:5000/api/words/"+id);
+        fetchData();
     }
     return (
         <Container>
@@ -37,18 +40,7 @@ const Words = () => {
                             <td>3</td>
                             <td className={styles.btn2}>
                                 <Button variant="outline-warning" as={Link} to={'../words/edit'} state={{data: item}}>Edit</Button>
-                                <ConfirmToast
-                                    asModal={true}
-                                    customCancel={'No'}
-                                    customConfirm={'Yes'}
-                                    customFunction={handleDelete}
-                                    message={'Do you want to continue and execute the function?'}
-                                    position={'top-left'}
-                                    showCloseIcon={false}
-                                    theme={'light'}
-                                >
-                                    <Button variant="outline-danger">Delete</Button>
-                                </ConfirmToast>
+                                <Button variant="outline-danger" onClick={()=>handleDelete(item.id)}>Delete</Button>
                             </td>
                         </tr>
                     ))}

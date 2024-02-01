@@ -11,7 +11,7 @@ const AddLevel = () => {
             id: 0,
             type: level
         }
-        axios.post("https://localhost:7149/api/levels", newLevel);
+        axios.post("http://localhost:5000/api/levels", newLevel);
         navigate('/admin/levels')
     }
     return (

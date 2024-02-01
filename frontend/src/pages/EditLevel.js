@@ -13,7 +13,7 @@ const EditLevel = () => {
             id: data.id,
             type: level
         }
-        axios.put("https://localhost:7149/api/levels/"+data.id, newLevel)
+        axios.put("http://localhost:5000/api/levels/"+data.id, newLevel)
         .then(response => {
             console.log(response.data);
         })

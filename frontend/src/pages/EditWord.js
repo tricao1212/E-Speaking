@@ -23,7 +23,7 @@ const EditWord = () => {
             content: word,
             difficultyId: difficulty
         }
-        axios.put("https://localhost:7149/api/words/"+data.id, newWord)
+        axios.put("http://localhost:5000/api/words/"+data.id, newWord)
         .then(response => {
             console.log(response.data);
         })

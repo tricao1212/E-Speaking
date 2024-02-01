@@ -11,7 +11,7 @@ const AddDifficulty = () => {
             id: 0,
             type: difficulty
         }
-        axios.post("https://localhost:7149/api/difficulties", newDifficulty);
+        axios.post("http://localhost:5000/api/difficulties", newDifficulty);
         navigate('/admin/difficulties')
     }
     return (

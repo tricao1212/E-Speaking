@@ -21,6 +21,9 @@ namespace E_Speaking.Data
         public DbSet<E_Speaking.Models.Sentence> Sentence { get; set; }
 
         public DbSet<E_Speaking.Models.Difficulty> Difficulty { get; set; }
+        
         public DbSet<E_Speaking.Models.Word_Lesson> Word_Lesson { get; set; }
+
+        public DbSet<E_Speaking.Models.User> User { get; set; }
     }
 }

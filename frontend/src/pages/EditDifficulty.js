@@ -7,13 +7,15 @@ const EditDifficulty = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const {data} = location.state;
+    console.log(location);
+    
     const [difficulty, setDifficulty] = useState(data.type);
     const handleSubmit = () => {
         const newDifficulty = {
             id: data.id,
             type: difficulty
         }
-        axios.put("https://localhost:7149/api/difficulties/"+data.id, newDifficulty)
+        axios.put("http://localhost:5000/api/difficulties/"+data.id, newDifficulty)
         .then(response => {
             console.log(response.data);
         })
