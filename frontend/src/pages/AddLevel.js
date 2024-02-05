@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import { Bounce, toast } from "react-toastify";
 
 const AddLevel = ({navigate}) => {
     const [level, setLevel] = useState('');
@@ -13,6 +14,17 @@ const AddLevel = ({navigate}) => {
         axios.post("http://localhost:5000/api/levels", newLevel)
         .then(response=>{
             console.log(response);
+            toast('Added Successful!', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+                });
             navigate('/admin/levels')
         });
     }

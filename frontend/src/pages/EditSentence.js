@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useLocation } from 'react-router-dom'
+import { Bounce, toast } from "react-toastify";
 const EditSentence = ({navigate}) => {
     const location = useLocation()
     const {data} = location.state;
@@ -26,6 +27,17 @@ const EditSentence = ({navigate}) => {
         axios.put("http://localhost:5000/api/sentences/"+data.id, newSentence)
         .then(response => {
             console.log(response.data);
+            toast('Updated Successful!', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+                });
             navigate('/admin/sentences');
         })
         .catch(error=>{

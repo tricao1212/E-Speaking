@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import { Bounce, toast } from "react-toastify";
 
 const AddWord = ({navigate}) => {
     const [word, setWord] = useState('')
@@ -22,6 +23,17 @@ const AddWord = ({navigate}) => {
         axios.post("http://localhost:5000/api/words",newSentence)
         .then(response => {
             console.log(response.data);
+            toast('Added Successful!', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+                });
             navigate('/admin/words');
         })
         .catch(error=>{

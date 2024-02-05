@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
+import { Bounce, toast } from "react-toastify";
 
 const EditLevel = ({navigate}) => {
     const location = useLocation();
@@ -16,11 +17,22 @@ const EditLevel = ({navigate}) => {
         axios.put("http://localhost:5000/api/levels/"+data.id, newLevel)
         .then(response => {
             console.log(response.data);
+            toast('Updated Successful!', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+                });
+            navigate('/admin/levels');
         })
         .catch(error=>{
             console.error("Error: ", error);
         });
-        navigate('/admin/levels');
     }
     return (
         <Container>

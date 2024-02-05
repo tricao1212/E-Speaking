@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import { Bounce, toast } from "react-toastify";
 
 const AddDifficulty = ({navigate}) => {
     const [difficulty, setDifficulty] = useState('');
@@ -11,6 +12,17 @@ const AddDifficulty = ({navigate}) => {
         }
         axios.post("http://localhost:5000/api/difficulties", newDifficulty)
         .then(()=>{
+            toast('Added Successful!', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+                });
             navigate('/admin/difficulties');
         })
     }
