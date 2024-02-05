@@ -8,4 +8,5 @@
     align-items: center;
     padding: 8px 16px;
     background-color: lightgray;
+    justify-content: space-between;
 }

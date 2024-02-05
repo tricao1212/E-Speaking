@@ -1,18 +1,20 @@
 import axios from "axios";
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 
-const AddLevel = () => {
+const AddLevel = ({navigate}) => {
     const [level, setLevel] = useState('');
-    const navigate = useNavigate();
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
         const newLevel= {
             id: 0,
             type: level
         }
-        axios.post("http://localhost:5000/api/levels", newLevel);
-        navigate('/admin/levels')
+        axios.post("http://localhost:5000/api/levels", newLevel)
+        .then(response=>{
+            console.log(response);
+            navigate('/admin/levels')
+        });
     }
     return (
         <Container>

@@ -1,20 +1,19 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 
-const AddWord = () => {
+const AddWord = ({navigate}) => {
     const [word, setWord] = useState('')
     const [difficulties, setDifficulties] = useState([])
     const [difficulty, setDifficulty] = useState(0)
-    const navigate = useNavigate();
     useEffect(() => {
         axios.get("http://localhost:5000/api/difficulties")
         .then(response => {
             setDifficulties(response.data);
         })
     },[])
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         const newSentence = {
             id: 0,
             content: word,
@@ -23,11 +22,11 @@ const AddWord = () => {
         axios.post("http://localhost:5000/api/words",newSentence)
         .then(response => {
             console.log(response.data);
+            navigate('/admin/words');
         })
         .catch(error=>{
             console.error("Error: ", error);
         });
-        navigate('/admin/words');
     }
     
     return (
@@ -48,15 +47,7 @@ const AddWord = () => {
                     </Form.Select>
                     <span></span>
                 </Form.Group>
-                <Form.Group>
-                    <Form.Label>Group</Form.Label>
-                    <Form.Select>
-                        <option>Select a group</option>
-                        <option>1</option>
-                        <option>2</option>
-                    </Form.Select>
-                    <span></span>
-                </Form.Group>
+                
                 <Button type="submit">Add</Button>
             </Form>
         </Container>

@@ -14,10 +14,12 @@ const AdminHeader = () => {
             <header>
                 <nav>
                     <div className={styles.logofield}>
-                        <img className={styles.logo} src="../logo192.png" alt=''/>
-                        <h5>E-Speaking</h5>
+                        <div style={{display: 'flex', alignItems: 'center'}}>
+                            <img className={styles.logo} src="../logo192.png" alt=''/>
+                            <h5>E-Speaking</h5>
+                        </div>
+                        <p onClick={handleSignOut}>Log Out</p>
                     </div>
-                    <p onClick={handleSignOut}>Log Out</p>
                 </nav>
             </header>
         </div>

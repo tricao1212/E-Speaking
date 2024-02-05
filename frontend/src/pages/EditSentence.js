@@ -1,23 +1,23 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { useLocation, useNavigate } from 'react-router-dom'
-const EditSentence = () => {
+import { useLocation } from 'react-router-dom'
+const EditSentence = ({navigate}) => {
     const location = useLocation()
-    const navigate = useNavigate()
     const {data} = location.state;
     const [difficulties, setDifficulties] = useState([]);
     const [sentence, setSentence] = useState(data.content);
     const [difficulty, setDifficulty] = useState(data.difficultyId);
 
     useEffect(()=> {
-        axios.get("https://localhost:7149/api/difficulties")
+        axios.get("http://localhost:5000/api/difficulties")
         .then(response=> {
             setDifficulties(response.data)
         });
     },[])
     
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
         const newSentence = {
             id: data.id,
             content: sentence,
@@ -26,11 +26,11 @@ const EditSentence = () => {
         axios.put("http://localhost:5000/api/sentences/"+data.id, newSentence)
         .then(response => {
             console.log(response.data);
+            navigate('/admin/sentences');
         })
         .catch(error=>{
             console.error("Error: ", error);
         });
-        navigate('/admin/sentences');
     }
     return (
         <Container>

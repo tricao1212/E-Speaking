@@ -1,16 +1,15 @@
 import axios from "axios";
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-const EditDifficulty = () => {
+const EditDifficulty = ({navigate}) => {
     const location = useLocation();
-    const navigate = useNavigate();
     const {data} = location.state;
-    console.log(location);
     
     const [difficulty, setDifficulty] = useState(data.type);
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         const newDifficulty = {
             id: data.id,
             type: difficulty
@@ -18,11 +17,11 @@ const EditDifficulty = () => {
         axios.put("http://localhost:5000/api/difficulties/"+data.id, newDifficulty)
         .then(response => {
             console.log(response.data);
+            navigate('/admin/difficulties');
         })
         .catch(error=>{
             console.error("Error: ", error);
         });
-        navigate('/admin/difficulties');
     }
     return (
         <Container>

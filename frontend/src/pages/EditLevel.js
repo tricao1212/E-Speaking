@@ -1,14 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-const EditLevel = () => {
+const EditLevel = ({navigate}) => {
     const location = useLocation();
-    const navigate = useNavigate();
     const {data} = location.state;
     const [level, setLevel] = useState(data.type);
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         const newLevel = {
             id: data.id,
             type: level

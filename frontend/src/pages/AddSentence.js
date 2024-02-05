@@ -1,11 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 
-const AddSentence = () => {
+const AddSentence = ({navigate}) => {
 
-    const navigate = useNavigate();
     const [sentence, setSentence] = useState('');
     const [difficulties, setDifficulties] = useState([]);
     const [difficulty, setDifficulty] = useState(0);
@@ -16,7 +14,8 @@ const AddSentence = () => {
             setDifficulties(response.data);
         })
     },[])
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
         const newSentence = {
             id: 0,
             content: sentence,
@@ -25,11 +24,11 @@ const AddSentence = () => {
         axios.post("http://localhost:5000/api/sentences",newSentence)
         .then(response => {
             console.log(response.data);
+            navigate('/admin/sentences');
         })
         .catch(error=>{
             console.error("Error: ", error);
         });
-        navigate('/admin/sentences');
     }
     return (
         <Container>

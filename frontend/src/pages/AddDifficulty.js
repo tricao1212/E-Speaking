@@ -1,18 +1,18 @@
 import axios from "axios";
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 
-const AddDifficulty = () => {
+const AddDifficulty = ({navigate}) => {
     const [difficulty, setDifficulty] = useState('');
-    const navigate = useNavigate();
     const handleSubmit = () => {
         const newDifficulty = {
             id: 0,
             type: difficulty
         }
-        axios.post("http://localhost:5000/api/difficulties", newDifficulty);
-        navigate('/admin/difficulties')
+        axios.post("http://localhost:5000/api/difficulties", newDifficulty)
+        .then(()=>{
+            navigate('/admin/difficulties');
+        })
     }
     return (
         <Container>

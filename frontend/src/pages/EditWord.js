@@ -1,23 +1,23 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const EditWord = () => {
-    const location = useLocation()
-    const navigate = useNavigate()
+const EditWord = ({location}) => {
+    const navigate = useNavigate();
     const {data} = location.state;
     const [difficulties, setDifficulties] = useState([]);
     const [word, setWord] = useState(data.content);
     const [difficulty, setDifficulty] = useState(data.difficultyId);
 
     useEffect(()=> {
-        axios.get("https://localhost:7149/api/difficulties")
+        axios.get("http://localhost:5000/api/difficulties")
         .then(response=> {
             setDifficulties(response.data)
         });
     },[])
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
         const newWord = {
             id: data.id,
             content: word,
@@ -26,11 +26,11 @@ const EditWord = () => {
         axios.put("http://localhost:5000/api/words/"+data.id, newWord)
         .then(response => {
             console.log(response.data);
+            navigate('/admin/words');
         })
         .catch(error=>{
             console.error("Error: ", error);
         });
-        navigate('/admin/words');
     }
     return (
         <Container>

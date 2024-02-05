@@ -1,25 +1,62 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Button, Container, Table } from "react-bootstrap";
+import { Button, Container, Modal, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styles from "../styles/buttons.module.css";
-import { ConfirmToast } from "react-confirm-toast";
-const Levels = () => {
+import { Bounce, toast } from "react-toastify";
+const Levels = ({navigate}) => {
     const [levels, setLevels] = useState([]);
+    const [id, setId] = useState(0);
+    const [show, setShow] = useState(false);
+
     const fetchData = () => {
         axios.get("http://localhost:5000/api/levels")
         .then(response => setLevels(response.data));
     }
     useEffect(() => {
         fetchData();
-    },[])
+    },[navigate])
     const handleDelete =async (id) => {
         await axios.delete("http://localhost:5000/api/levels/"+id);
         fetchData();
+        handleClose();
+        toast('Deleted Successful!', {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+            });
+    }
+    const handleClose = () => {
+        setShow(false);
+        setId(0);
+    }
+    const handleShow = (selectedId) => {
+        setShow(true);
+        setId(selectedId);
     }
     return (
         <Container>
             <Button variant="outline-primary" as={Link} to={'../levels/add'}>Add</Button>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Warning</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Are you sure to delete this content? It will be removed permanently.</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        No
+                    </Button>
+                    <Button variant="danger" onClick={()=>handleDelete(id)}>
+                        Yes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
             <Table>
                 <thead>
                     <tr>
@@ -35,18 +72,7 @@ const Levels = () => {
                             <td>{item.type}</td>
                             <td className={styles.btn2}>
                                 <Button variant="outline-warning" as={Link} to={'../levels/edit'} state={{data: item}}>Edit</Button>
-                                <ConfirmToast
-                                    asModal={true}
-                                    customCancel={'No'}
-                                    customConfirm={'Yes'}
-                                    customFunction={()=>handleDelete(item.id)}
-                                    message={'Do you want to continue and execute the function?'}
-                                    position={'top-left'}
-                                    showCloseIcon={false}
-                                    theme={'light'}
-                                >
-                                    <Button variant="outline-danger">Delete</Button>
-                                </ConfirmToast>
+                                <Button variant="outline-danger" onClick={()=>handleShow(item.id)}>Delete</Button>
                             </td>
                         </tr>
                     ))}
