@@ -4,18 +4,18 @@ import { Button, Container, Form } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
 
-const EditDifficulty = ({navigate}) => {
+const EditLesson = ({navigate}) => {
     const location = useLocation();
     const {data} = location.state;
     
-    const [difficulty, setDifficulty] = useState(data.type);
+    const [lesson, setLesson] = useState(data.name);
     const handleSubmit = (e) => {
         e.preventDefault();
-        const newDifficulty = {
+        const newLesson = {
             id: data.id,
-            type: difficulty
+            name: lesson
         }
-        axios.put("http://localhost:5000/api/difficulties/"+data.id, newDifficulty)
+        axios.put("http://34.136.63.21/api/lessons/"+data.id, newLesson)
         .then(response => {
             console.log(response.data);
             toast('Updated Successful!', {
@@ -29,7 +29,7 @@ const EditDifficulty = ({navigate}) => {
                 theme: "light",
                 transition: Bounce,
                 });
-            navigate('/admin/difficulties');
+            navigate('/admin/lessons');
         })
         .catch(error=>{
             console.error("Error: ", error);
@@ -40,7 +40,7 @@ const EditDifficulty = ({navigate}) => {
             <Form onSubmit={handleSubmit}>
                 <Form.Group>
                     <Form.Label>Difficulty</Form.Label>
-                    <Form.Control type="text" placeholder="Enter a difficulty" value={difficulty} onChange={e=>{setDifficulty(e.target.value)}}/>
+                    <Form.Control type="text" placeholder="Enter a lesson" value={lesson} onChange={e=>{setLesson(e.target.value)}}/>
                     <span></span>
                 </Form.Group>
                 <Button type="submit">Update</Button>
@@ -48,4 +48,4 @@ const EditDifficulty = ({navigate}) => {
         </Container>
     )
 }
-export default EditDifficulty;
+export default EditLesson;

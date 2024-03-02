@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { GoogleAuthProvider, onAuthStateChanged, signInWithRedirect, signOut } from 'firebase/auth'
+import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth'
 import {auth} from '../firebase'
 import axios from 'axios';
 
@@ -9,7 +9,7 @@ export const AuthContextProvider = ({children}) => {
     const [user, setUser] = useState({});
     const googleSignIn = ()=>{
         const provider = new GoogleAuthProvider();
-        signInWithRedirect(auth, provider);
+        signInWithPopup(auth, provider);
     }
     const logOut = () => {
         signOut(auth);
@@ -22,13 +22,14 @@ export const AuthContextProvider = ({children}) => {
             name: signedUser.displayName,
             role: 2
         }
-        await axios.post('http://localhost:5000/api/auth', newUser)
+        await axios.post('http://34.136.63.21/api/auth', newUser)
                 .then(response => console.log(response.data))
                 .catch(e=>console.log(e))
     }
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
+            console.log(currentUser);
             if (currentUser!=null){
                 postUser(currentUser);
             }

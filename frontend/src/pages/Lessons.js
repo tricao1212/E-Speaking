@@ -5,20 +5,20 @@ import { Link } from "react-router-dom";
 import styles from "../styles/buttons.module.css";
 import { Bounce, toast } from "react-toastify";
 
-const Difficulties = ({navigate}) => {
-    const [difficulties, setDifficulties] = useState([]);
+const Lesson = ({navigate}) => {
+    const [lesson, setLesson] = useState([]);
     const [id, setId] = useState(0);
     const [show, setShow] = useState(false);
 
     const fetchData = () => {
-        axios.get('http://localhost:5000/api/difficulties')
-        .then(response => setDifficulties(response.data))
+        axios.get('http://34.136.63.21/api/lessons')
+        .then(response => setLesson(response.data))
     }
     useEffect(()=> {
         fetchData();
     },[navigate])
     const handleDelete = async (id) => {
-        await axios.delete("http://localhost:5000/api/difficulties/"+id);
+        await axios.delete("http://34.136.63.21/api/lessons/"+id);
         fetchData();
         handleClose();
         toast('Deleted Successful!', {
@@ -43,18 +43,18 @@ const Difficulties = ({navigate}) => {
     }
     return (
         <Container>
-            <Button variant="outline-primary" as={Link} to={'../difficulties/add'}>Add</Button>
+            <Button variant="outline-primary" as={Link} to={'../lessons/add'}>Add</Button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Warning</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>Are you sure to delete this content? It will be removed permanently.</Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        No
-                    </Button>
                     <Button variant="danger" onClick={()=>handleDelete(id)}>
                         Yes
+                    </Button>
+                    <Button variant="secondary" onClick={handleClose}>
+                        No
                     </Button>
                 </Modal.Footer>
             </Modal>
@@ -67,12 +67,12 @@ const Difficulties = ({navigate}) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {difficulties.map((item, index)=>(
+                    {lesson.map((item, index)=>(
                         <tr key={item.id}>
                             <td>{index + 1}</td>
-                            <td>{item.type}</td>
+                            <td>{item.name}</td>
                             <td className={styles.btn2}>
-                                <Button variant="outline-warning" as={Link} to={'../difficulties/edit'} state={{data:item}}>Edit</Button>
+                                <Button variant="outline-warning" as={Link} to={'../lessons/edit'} state={{data:item}}>Edit</Button>
                                 <Button variant="outline-danger" onClick={()=>handleShow(item.id)}>Delete</Button>
                             </td>
                         </tr>
@@ -82,4 +82,4 @@ const Difficulties = ({navigate}) => {
         </Container>
     )
 }
-export default Difficulties;
+export default Lesson;

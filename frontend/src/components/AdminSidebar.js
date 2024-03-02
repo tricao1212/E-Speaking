@@ -8,7 +8,7 @@ const AdminSidebar = () => {
             <ListGroup.Item as={NavLink} to={'/admin/words'}>Words</ListGroup.Item>
             <ListGroup.Item as={NavLink} to={'/admin/sentences'}>Sentences</ListGroup.Item>
             <ListGroup.Item as={NavLink} to={'/admin/levels'}>Levels</ListGroup.Item>
-            <ListGroup.Item as={NavLink} to={'/admin/difficulties'}>Difficulties</ListGroup.Item>
+            <ListGroup.Item as={NavLink} to={'/admin/lessons'}>Lessons</ListGroup.Item>
         </ListGroup>
     )
 }

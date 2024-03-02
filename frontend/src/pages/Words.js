@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import {Table ,Container, Button, Modal} from "react-bootstrap";
+import {Table ,Container, Button, Modal, Pagination} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styles from "../styles/buttons.module.css";
 import { Bounce, toast } from "react-toastify";
@@ -8,8 +8,10 @@ const Words = () => {
     const [id, setId] = useState(0);
     const [show, setShow] = useState(false);
     const [words, setWords] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [wordsPerPage] = useState(5);
     const fetchData = () => {
-        axios.get("http://localhost:5000/api/words")
+        axios.get("http://34.136.63.21/api/words")
         .then(response => {
             setWords(response.data);
         })
@@ -27,7 +29,7 @@ const Words = () => {
     },[])
     
     const handleDelete =async (id) => {
-        await axios.delete("http://localhost:5000/api/words/"+id);
+        await axios.delete("http://34.136.63.21/api/words/"+id);
         fetchData();
         handleClose();
         toast('Deleted Successful!', {
@@ -42,6 +44,11 @@ const Words = () => {
             transition: Bounce,
             });
     }
+    const indexOfLastWord = currentPage * wordsPerPage;
+    const indexOfFirstWord = indexOfLastWord - wordsPerPage;
+    const currentWords = words.slice(indexOfFirstWord, indexOfLastWord);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
     return (
         
         <Container>
@@ -65,27 +72,36 @@ const Words = () => {
                     <tr>
                         <th>#</th>
                         <th>Word</th>
-                        <th>Difficulty</th>
-                        <th>Group</th>
+                        <th>Lesson</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {words.map((item, index) => (
+                    {currentWords.map((item, index) => (
                         <tr key={index}>
-                            <td>{index+1}</td>
+                            <td>{(currentPage-1)*wordsPerPage+index+1}</td>
                             <td>{item.content}</td>
-                            <td>{item.difficulty.type}</td>
-                            <td>3</td>
-                            <td className={styles.btn2}>
-                                <Button variant="outline-warning" as={Link} to={'../words/edit'} state={{data: item}}>Edit</Button>
-                                <Button variant="outline-danger" onClick={()=>handleShow(item.id)}>Delete</Button>
+                            <td>{item.lesson.name}</td>
+                            <td >
+                                <Button className={styles.btn2} variant="outline-warning" as={Link} to={'../words/edit'} state={{data: item}}>Edit</Button>
+                                <Button className={styles.btn2} variant="outline-danger" onClick={()=>handleShow(item.id)}>Delete</Button>
                             </td>
                         </tr>
                         
                     ))}
                 </tbody>
             </Table>
+            <Pagination>
+                {Array.from({ length: Math.ceil(words.length / wordsPerPage) }).map((_, index) => (
+                    <Pagination.Item
+                        key={index}
+                        active={index + 1 === currentPage}
+                        onClick={() => paginate(index + 1)}
+                    >
+                        {index + 1}
+                    </Pagination.Item>
+                ))}
+            </Pagination>
         </Container>
     )
 }

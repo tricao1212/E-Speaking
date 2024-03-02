@@ -1,5 +1,4 @@
 .btn2 {
-    display: flex;
-    justify-content: space-between;
-    width: 150px;
+    margin-left: 10px;
+    margin-right: 10px;
 }

@@ -11,10 +11,10 @@ import AddWord from "./AddWord"
 import EditWord from "./EditWord"
 import EditSentence from "./EditSentence"
 import Levels from "./Levels"
-import Difficulties from "./Difficulties"
-import AddDifficulty from "./AddDifficulty"
+import Lessons from "./Lessons"
+import AddLesson from "./AddLesson"
 import AddLevel from "./AddLevel"
-import EditDifficulty from "./EditDifficulty"
+import EditLesson from "./EditLesson"
 import EditLevel from "./EditLevel"
 
 const Admin = () => {
@@ -41,9 +41,9 @@ const Admin = () => {
                             <Route path="/levels" element={<Levels />} />
                             <Route path="/levels/add" element={<AddLevel navigate={navigate}/>} />
                             <Route path="/levels/edit" element={<EditLevel navigate={navigate}/>} />
-                            <Route path="/difficulties" element={<Difficulties />} />
-                            <Route path="/difficulties/add" element={<AddDifficulty navigate={navigate}/>} />
-                            <Route path="/difficulties/edit" element={<EditDifficulty navigate={navigate}/>} />
+                            <Route path="/lessons" element={<Lessons />} />
+                            <Route path="/lessons/add" element={<AddLesson navigate={navigate}/>} />
+                            <Route path="/lessons/edit" element={<EditLesson navigate={navigate}/>} />
                         </Routes>
                     </Col>
                 </Row>

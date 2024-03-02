@@ -5,22 +5,22 @@ import { Bounce, toast } from "react-toastify";
 
 const AddWord = ({navigate}) => {
     const [word, setWord] = useState('')
-    const [difficulties, setDifficulties] = useState([])
-    const [difficulty, setDifficulty] = useState(0)
+    const [lessons, setLessons] = useState([])
+    const [lesson, setLesson] = useState(0)
     useEffect(() => {
-        axios.get("http://localhost:5000/api/difficulties")
+        axios.get("http://34.136.63.21/api/lessons")
         .then(response => {
-            setDifficulties(response.data);
+            setLessons(response.data);
         })
     },[])
     const handleSubmit = (e) => {
         e.preventDefault();
-        const newSentence = {
+        const newWord = {
             id: 0,
             content: word,
-            difficultyId: difficulty
+            lessonId: lesson
         }
-        axios.post("http://localhost:5000/api/words",newSentence)
+        axios.post("http://34.136.63.21/api/words",newWord)
         .then(response => {
             console.log(response.data);
             toast('Added Successful!', {
@@ -50,11 +50,11 @@ const AddWord = ({navigate}) => {
                     <span></span>
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>Difficulty</Form.Label>
-                    <Form.Select aria-label="Difficulty" onChange={e=>setDifficulty(e.target.value)}>
-                        <option>Select a difficulty</option>
-                        {difficulties.map((item) => (
-                            <option key={item.id} value={item.id}>{item.type}</option>
+                    <Form.Label>Lesson</Form.Label>
+                    <Form.Select aria-label="Lesson" onChange={e=>setLesson(e.target.value)}>
+                        <option>Select a lesson</option>
+                        {lessons.map((item) => (
+                            <option key={item.id} value={item.id}>{item.name}</option>
                         ))}
                     </Form.Select>
                     <span></span>
