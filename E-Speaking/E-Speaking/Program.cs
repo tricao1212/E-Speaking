@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using E_Speaking.Data;
+using Microsoft.AspNetCore.Identity;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<E_SpeakingContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("E_SpeakingContext") ?? throw new InvalidOperationException("Connection string 'E_SpeakingContext' not found.")));
@@ -32,7 +34,6 @@ if (app.Environment.IsDevelopment())
 }
 app.UseCors("ReactPolicy");
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
 
 app.MapControllers();

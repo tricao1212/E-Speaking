@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { GoogleAuthProvider, onAuthStateChanged, signInWithRedirect, signOut } from 'firebase/auth'
+import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signInWithRedirect, signOut } from 'firebase/auth'
 import {auth} from '../firebase'
 import axios from 'axios';
 
@@ -9,7 +9,7 @@ export const AuthContextProvider = ({children}) => {
     const [user, setUser] = useState({});
     const googleSignIn = ()=>{
         const provider = new GoogleAuthProvider();
-        signInWithRedirect(auth, provider);
+        signInWithPopup(auth, provider);
     }
     const logOut = () => {
         signOut(auth);
@@ -29,6 +29,7 @@ export const AuthContextProvider = ({children}) => {
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
+            console.log(currentUser);
             if (currentUser!=null){
                 postUser(currentUser);
             }

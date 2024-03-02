@@ -28,7 +28,7 @@ namespace E_Speaking.Controllers
             return await _context.Difficulty.ToListAsync();
         }
 
-        // GET: api/Difficulties/5
+        //GET: api/Difficulties/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Difficulty>> GetDifficulty(int id)
         {

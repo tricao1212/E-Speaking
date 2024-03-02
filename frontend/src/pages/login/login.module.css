@@ -1,0 +1,20 @@
+.left img{
+    height: 100vh;
+    padding-left: 5rem;
+}
+
+.left{
+    background-color: gainsboro;
+}
+
+.welcome{
+   display: flex;
+   justify-content: center;
+   margin-bottom: 5rem;
+   margin-top: 10rem;
+}
+
+.login_btn{
+    display: flex;
+    justify-content: center;
+}

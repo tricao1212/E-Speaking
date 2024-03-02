@@ -1,0 +1,45 @@
+.logo img{
+    width: 15rem;
+    height: 6rem;
+    padding: 1rem;
+}.logo{
+    margin-bottom: 3vh;
+}
+.sidebar{
+    position: relative;
+    border-right: 1px solid black;
+    height: 100vh;
+    background-color: aliceblue;
+}
+.option button{
+    display: flex;
+    justify-content: left;
+    color: #000;
+    width: 100%;
+    height: 5vh;
+    text-transform: none !important;
+    font-size: inherit;
+    margin-bottom: 7px;
+}
+.option button svg{
+    margin-left: 15px;
+    margin-right: 3px;
+    font-size: 35px !important;
+}
+.option{
+    padding-left: 10px;
+}
+
+.option a{
+    text-decoration: none;
+}
+
+.sidebar .logOut{
+    position: absolute;
+    bottom: 0;
+    width: 97%;
+    margin-bottom: 20px;
+}
+.option .activeButton{
+    background-color: cornflowerblue;
+}

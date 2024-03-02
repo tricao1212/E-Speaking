@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container, Modal, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import styles from "../styles/buttons.module.css";
 import { Bounce, toast } from "react-toastify";
 const Levels = ({navigate}) => {
     const [levels, setLevels] = useState([]);
@@ -70,7 +69,7 @@ const Levels = ({navigate}) => {
                         <tr key={item.id}>
                             <td>{index+1}</td>
                             <td>{item.type}</td>
-                            <td className={styles.btn2}>
+                            <td>
                                 <Button variant="outline-warning" as={Link} to={'../levels/edit'} state={{data: item}}>Edit</Button>
                                 <Button variant="outline-danger" onClick={()=>handleShow(item.id)}>Delete</Button>
                             </td>

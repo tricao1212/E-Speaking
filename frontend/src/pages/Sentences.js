@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import {Table ,Container, Button, Modal} from "react-bootstrap";
 import { Link } from "react-router-dom";
-import styles from "../styles/buttons.module.css";
 import { Bounce, toast } from "react-toastify";
 const Sentences = () => {
     const [sentences, setSentences] = useState([]);
@@ -59,13 +58,13 @@ const Sentences = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
-            <Table>
+            <Table variant="white">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Sentences</th>
                         <th>Difficulty</th>
-                        <th></th>
+                        <th>Function</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -74,7 +73,7 @@ const Sentences = () => {
                             <td>{index+1}</td>
                             <td>{item.content}</td>
                             <td>{item.difficulty.type}</td>
-                            <td className={styles.btn2}>
+                            <td>
                                 <Button variant="outline-warning" as={Link} to={'../sentences/edit'} state={{data: item}}>Edit</Button>
                                 <Button variant="outline-danger" onClick={()=>handleShow(item.id)}>Delete</Button>
                             </td>

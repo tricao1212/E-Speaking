@@ -1,0 +1,9 @@
+.img{
+    width: 15rem;
+    height: 6rem;
+    padding: 1rem;
+}
+header{
+    display: flex;
+    justify-content: center;
+}

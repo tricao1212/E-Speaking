@@ -6,7 +6,7 @@ const CheckRoute = () => {
     const {user} = UserAuth();
     const navigate = useNavigate();
     useEffect(()=> {
-        if (user != null) {
+        if (user == null) {
             navigate('/admin')
         }
     }, [user])

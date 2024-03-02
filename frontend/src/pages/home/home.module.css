@@ -1,0 +1,17 @@
+.right img{
+    width: 70vh;
+}
+.firstBlock{
+    border-radius: 1%;
+}
+
+.left{
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-left: 5rem;
+}
+
+.left h1{
+    font-weight: bold;
+}

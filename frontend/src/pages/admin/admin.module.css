@@ -1,0 +1,28 @@
+.adminContent{
+    padding-left: 0;
+}
+.headerAd{
+    position: relative;
+    padding: 0;
+    height: 7rem;
+    border-bottom: 1px solid black;
+    margin-bottom: 5vh;
+    background-color: aliceblue;
+}
+.sidebar{
+    padding: 0;
+}
+.content{
+    padding: 0;
+}
+
+.adminAva{
+    font-size: x-large;
+    position: absolute;
+    right: 3%;
+    bottom: 20%;
+}
+
+.adminAva svg{
+    font-size: xx-large;
+}
