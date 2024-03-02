@@ -2,7 +2,8 @@
     width: 15rem;
     height: 6rem;
     padding: 1rem;
-}.logo{
+}
+.logo{
     margin-bottom: 3vh;
 }
 .sidebar{
@@ -11,7 +12,7 @@
     height: 100vh;
     background-color: aliceblue;
 }
-.option button{
+/* .option button{
     display: flex;
     justify-content: left;
     color: #000;
@@ -25,13 +26,14 @@
     margin-left: 15px;
     margin-right: 3px;
     font-size: 35px !important;
-}
+} */
 .option{
     padding-left: 10px;
 }
 
-.option a{
+.text{
     text-decoration: none;
+    color: #000;
 }
 
 .sidebar .logOut{
@@ -39,7 +41,4 @@
     bottom: 0;
     width: 97%;
     margin-bottom: 20px;
-}
-.option .activeButton{
-    background-color: cornflowerblue;
 }

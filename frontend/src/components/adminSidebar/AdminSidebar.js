@@ -9,17 +9,11 @@ import AbcOutlinedIcon from "@mui/icons-material/AbcOutlined";
 import LibraryBooksOutlinedIcon from "@mui/icons-material/LibraryBooksOutlined";
 import PersonPinOutlinedIcon from "@mui/icons-material/PersonPinOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import { Link } from "react-router-dom";
 import React, { useState } from 'react';
+import { List, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from "@mui/material";
 
 const AdminSidebar = () => {
   const location = useLocation();
-  const [currentButton, setCurrentButton] = useState(location.pathname);
-  console.log(location.pathname);
-
-  const handleButtonClick = (buttonId) => {
-    setCurrentButton(buttonId);
-  };
   const { logOut } = UserAuth();
   const handleSignOut = async () => {
     try {
@@ -36,47 +30,48 @@ const AdminSidebar = () => {
         </center>
       </div>
       <div className={style.option}>
-        <Link to="/admin">
-          <Button
-          className={currentButton === '/admin' ? style.activeButton : ""}
-          onClick={() => handleButtonClick(location.pathname)}
-            variant="text"
-            startIcon={<HomeOutlinedIcon />}
-          >
-            Home
-          </Button>
-        </Link>
-        <Link to="/admin/words">
-          <Button className={currentButton === '/admin/words' ? style.activeButton : ""}
-        onClick={() => handleButtonClick(location.pathname)} variant="text" startIcon={<FontDownloadOutlinedIcon />}>
-            Words
-          </Button>
-        </Link>
-        <Link to="/admin/sentences">
-          <Button className={currentButton === '/admin/sentences' ? style.activeButton : ""}
-        onClick={() => handleButtonClick(location.pathname)}  variant="text" startIcon={<AbcOutlinedIcon />}>
-            Sentences
-          </Button>
-        </Link>
-        {/* <Link to="/admin">
-          <Button className={currentButton === '/admin' ? style.activeButton : ""}
-        onClick={() => handleButtonClick(location.pathname)} variant="text" startIcon={<LibraryBooksOutlinedIcon />}>
-            Topic
-          </Button>
-        </Link>
-        <Link to="/admin">
-          <Button className={currentButton === '/admin' ? style.activeButton : ""}
-        onClick={() => handleButtonClick(location.pathname)}  variant="text" startIcon={<PersonPinOutlinedIcon />}>
-            User info
-          </Button>
-        </Link> */}
+        <List
+        sx={{ width: '100%', maxWidth: 360, bgcolor: '#F0F8FF' }}
+        component="nav" aria-labelledby="nested-list-subheader"
+        >
+          <ListItemButton as={NavLink} to={'/admin'} className={style.text} selected={location.pathname === "/admin"} >
+            <ListItemIcon>
+              <HomeOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItemButton>
+          <ListItemButton as={NavLink}  to={'/admin/words'} className={style.text} selected={location.pathname === "/admin/words"}>
+            <ListItemIcon>
+              <FontDownloadOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Words"  />
+          </ListItemButton>
+          <ListItemButton as={NavLink} to={'/admin/sentences'} className={style.text} selected={location.pathname === "/admin/sentences"}>
+            <ListItemIcon>
+              <AbcOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Sentences" />
+          </ListItemButton>
+          <ListItemButton as={NavLink} to={'/admin/difficulties'} className={style.text} selected={location.pathname === "/admin/difficulties"}>
+            <ListItemIcon>
+              <LibraryBooksOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Lessons" />
+          </ListItemButton>
+          <ListItemButton as={NavLink} to={'/admin/levels'} className={style.text} selected={location.pathname === "/admin/levels"}>
+            <ListItemIcon>
+              <PersonPinOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Level" />
+          </ListItemButton>
+        </List>
         <div className={style.logOut}>
           <Button startIcon={<LogoutOutlinedIcon />} onClick={handleSignOut}>
             Log Out
           </Button>
         </div>
       </div>
-    </div>
+     </div>
   );
 };
 export default AdminSidebar;
