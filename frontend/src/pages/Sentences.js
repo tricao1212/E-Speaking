@@ -70,7 +70,7 @@ const Sentences = () => {
                     <tr>
                         <th>#</th>
                         <th>Sentences</th>
-                        <th>Difficulty</th>
+                        <th>Lesson</th>
                         <th></th>
                     </tr>
                 </thead>

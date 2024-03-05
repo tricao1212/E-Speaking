@@ -7,7 +7,11 @@ const CheckRoute = () => {
     const navigate = useNavigate();
     useEffect(()=> {
         if (user != null) {
-            navigate('/admin')
+            // if(user.role===1)
+                navigate('/admin')
+            // else {
+            //     navigate('user')
+            // }
         }
     }, [user])
 }
