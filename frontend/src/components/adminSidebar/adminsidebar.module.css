@@ -8,11 +8,11 @@
 }
 .sidebar{
     position: relative;
-    border-right: 1px solid black;
+    /* border-right: 1px solid black; */
     height: 100vh;
     background-color: aliceblue;
 }
-/* .option button{
+.option button{
     display: flex;
     justify-content: left;
     color: #000;
@@ -26,7 +26,7 @@
     margin-left: 15px;
     margin-right: 3px;
     font-size: 35px !important;
-} */
+}
 .option{
     padding-left: 10px;
 }

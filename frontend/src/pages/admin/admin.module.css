@@ -5,7 +5,7 @@
     position: relative;
     padding: 0;
     height: 7rem;
-    border-bottom: 1px solid black;
+    /* border-bottom: 1px solid black; */
     margin-bottom: 5vh;
     background-color: aliceblue;
 }

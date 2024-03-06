@@ -9,8 +9,7 @@ import AbcOutlinedIcon from "@mui/icons-material/AbcOutlined";
 import LibraryBooksOutlinedIcon from "@mui/icons-material/LibraryBooksOutlined";
 import PersonPinOutlinedIcon from "@mui/icons-material/PersonPinOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import React, { useState } from 'react';
-import { List, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from "@mui/material";
+import { List, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 
 const AdminSidebar = () => {
   const location = useLocation();

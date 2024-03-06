@@ -32,11 +32,11 @@ const Admin = () => {
                 <AdminSidebar />
               </Col>
               <Col className={style.content} md={10}>
-                <div className={style.headerAd}>
+                {/* <div className={style.headerAd}>
                   <div className={style.adminAva}>
                     <p><AccountCircleIcon />, Admin</p>
                   </div>
-                </div>
+                </div> */}
                 <Routes>
                   <Route path="/" element={<AdminHome />} />
                   <Route path="/words" element={<Words />} />
