@@ -14,7 +14,7 @@ const EditLevel = ({navigate}) => {
             id: data.id,
             type: level
         }
-        axios.put("http://localhost:5000/api/levels/"+data.id, newLevel)
+        axios.put("http://34.136.63.21/api/levels/"+data.id, newLevel)
         .then(response => {
             console.log(response.data);
             toast('Updated Successful!', {

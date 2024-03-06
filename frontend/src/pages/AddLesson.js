@@ -3,14 +3,16 @@ import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { Bounce, toast } from "react-toastify";
 
-const AddDifficulty = ({navigate}) => {
-    const [difficulty, setDifficulty] = useState('');
-    const handleSubmit = () => {
-        const newDifficulty = {
+const AddLesson = ({navigate}) => {
+
+    const [lesson, setLesson] = useState('');
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const newLesson = {
             id: 0,
-            type: difficulty
+            name: lesson
         }
-        axios.post("http://localhost:5000/api/difficulties", newDifficulty)
+        axios.post("http://34.136.63.21/api/lessons", newLesson)
         .then(()=>{
             toast('Added Successful!', {
                 position: "top-right",
@@ -23,15 +25,15 @@ const AddDifficulty = ({navigate}) => {
                 theme: "light",
                 transition: Bounce,
                 });
-            navigate('/admin/difficulties');
+            navigate('/admin/lessons');
         })
     }
     return (
         <Container>
             <Form onSubmit={handleSubmit}>
                 <Form.Group>
-                    <Form.Label>Difficulty</Form.Label>
-                    <Form.Control type="text" onChange={(e) => setDifficulty(e.target.value)} placeholder="Enter a difficulty"/>
+                    <Form.Label>Lesson</Form.Label>
+                    <Form.Control type="text" onChange={(e) => setLesson(e.target.value)} placeholder="Enter a lesson"/>
                     <span></span>
                 </Form.Group>
                 <Button type="submit">Add</Button>
@@ -39,4 +41,4 @@ const AddDifficulty = ({navigate}) => {
         </Container>
     )
 }
-export default AddDifficulty;
+export default AddLesson;

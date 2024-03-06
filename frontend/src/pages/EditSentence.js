@@ -6,14 +6,14 @@ import { Bounce, toast } from "react-toastify";
 const EditSentence = ({navigate}) => {
     const location = useLocation()
     const {data} = location.state;
-    const [difficulties, setDifficulties] = useState([]);
+    const [lessons, setLessons] = useState([]);
     const [sentence, setSentence] = useState(data.content);
-    const [difficulty, setDifficulty] = useState(data.difficultyId);
+    const [lesson, setLesson] = useState(data.difficultyId);
 
     useEffect(()=> {
-        axios.get("http://localhost:5000/api/difficulties")
+        axios.get("http://34.136.63.21/api/lessons")
         .then(response=> {
-            setDifficulties(response.data)
+            setLessons(response.data)
         });
     },[])
     
@@ -22,9 +22,9 @@ const EditSentence = ({navigate}) => {
         const newSentence = {
             id: data.id,
             content: sentence,
-            difficultyId: difficulty
+            lessonId: lesson
         }
-        axios.put("http://localhost:5000/api/sentences/"+data.id, newSentence)
+        axios.put("http://34.136.63.21/api/sentences/"+data.id, newSentence)
         .then(response => {
             console.log(response.data);
             toast('Updated Successful!', {
@@ -53,21 +53,12 @@ const EditSentence = ({navigate}) => {
                     <span></span>
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>Difficulty</Form.Label>
-                    <Form.Select aria-label="Difficulty" value={difficulty} onChange={e=>setDifficulty(e.target.value)}>
-                        <option>Select a difficulty</option>
-                        {difficulties.map((item) => (
-                            <option key={item.id} value={item.id}>{item.type}</option>
+                    <Form.Label>Lesson</Form.Label>
+                    <Form.Select aria-label="Lesson" value={lesson} onChange={e=>setLesson(e.target.value)}>
+                        <option>Select a lesson</option>
+                        {lessons.map((item) => (
+                            <option key={item.id} value={item.id}>{item.name}</option>
                         ))}
-                    </Form.Select>
-                    <span></span>
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Group</Form.Label>
-                    <Form.Select>
-                        <option>Select a group</option>
-                        <option>1</option>
-                        <option>2</option>
                     </Form.Select>
                     <span></span>
                 </Form.Group>

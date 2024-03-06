@@ -11,7 +11,7 @@ const AddLevel = ({navigate}) => {
             id: 0,
             type: level
         }
-        axios.post("http://localhost:5000/api/levels", newLevel)
+        axios.post("http://34.136.63.21/api/levels", newLevel)
         .then(response=>{
             console.log(response);
             toast('Added Successful!', {

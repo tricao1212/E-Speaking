@@ -9,14 +9,14 @@ const Levels = ({navigate}) => {
     const [show, setShow] = useState(false);
 
     const fetchData = () => {
-        axios.get("http://localhost:5000/api/levels")
+        axios.get("http://34.136.63.21/api/levels")
         .then(response => setLevels(response.data));
     }
     useEffect(() => {
         fetchData();
     },[navigate])
     const handleDelete =async (id) => {
-        await axios.delete("http://localhost:5000/api/levels/"+id);
+        await axios.delete("http://34.136.63.21/api/levels/"+id);
         fetchData();
         handleClose();
         toast('Deleted Successful!', {
