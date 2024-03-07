@@ -13,7 +13,7 @@ const Result = () => {
                     <div dangerouslySetInnerHTML={{ __html: item }} />
                 </p>
             ))}
-            <button onClick={()=>navigate('/')}>Go back</button>
+            <button onClick={()=>navigate('/user/learn/word')}>Go back</button>
         </div>
 
     )

@@ -31,7 +31,7 @@ export const AuthContextProvider = ({ children }) => {
     };
     await axios
       .post("http://34.136.63.21/api/auth", newUser)
-      .then((response) => console.log(response.data))
+      .then((response) => setUser(response.data))
       .catch((e) => console.log(e));
   };
   useEffect(() => {

@@ -3,15 +3,21 @@ import { useEffect, useState } from "react";
 import { Table, Container, Button, Modal, Pagination } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
+import Spinner from "../../../components/spinner/spinner";
+
 const Sentences = () => {
   const [sentences, setSentences] = useState([]);
   const [id, setId] = useState(0);
   const [show, setShow] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [sentencesPerPage] = useState(5);
+  const [isLoading, setIsLoading] = useState(false);
+
   const fetchData = () => {
+    setIsLoading(true);
     axios.get("http://34.136.63.21/api/sentences").then((response) => {
       setSentences(response.data);
+      setIsLoading(false);
     });
   };
   useEffect(() => {
@@ -49,7 +55,7 @@ const Sentences = () => {
   );
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  return (
+  const render = (
     <Container>
       <Button variant="outline-primary" as={Link} to={"../sentences/add"}>
         Add
@@ -87,7 +93,6 @@ const Sentences = () => {
               <td>{item.lesson.name}</td>
               <td>
                 <Button
-                  
                   variant="outline-warning"
                   as={Link}
                   to={"../sentences/edit"}
@@ -96,7 +101,6 @@ const Sentences = () => {
                   Edit
                 </Button>
                 <Button
-                  
                   variant="outline-danger"
                   onClick={() => handleShow(item.id)}
                 >
@@ -122,5 +126,11 @@ const Sentences = () => {
       </Pagination>
     </Container>
   );
+
+  return (
+    <>
+    {isLoading ? <Spinner /> : render}
+    </>
+  )
 };
 export default Sentences;

@@ -23,7 +23,7 @@ const AddWord = ({navigate}) => {
         axios.post("http://34.136.63.21/api/words",newWord)
         .then(response => {
             console.log(response.data);
-            toast('Added Successful!', {
+            toast.success('Added Successful!', {
                 position: "top-right",
                 autoClose: 3000,
                 hideProgressBar: false,

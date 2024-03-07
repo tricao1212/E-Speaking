@@ -27,7 +27,7 @@ const EditWord = ({location}) => {
         axios.put("http://34.136.63.21/api/words/"+data.id, newWord)
         .then(response => {
             console.log(response.data);
-            toast('Updated Successful!', {
+            toast.success('Updated Successful!', {
                 position: "top-right",
                 autoClose: 3000,
                 hideProgressBar: false,
