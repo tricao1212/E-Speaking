@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
 
-const AddLevel = ({navigate}) => {
+const AddLevel = () => {
     const [level, setLevel] = useState('');
+    const navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
         const newLevel= {

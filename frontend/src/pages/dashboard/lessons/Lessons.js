@@ -1,16 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container, Modal, Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
 import Spinner from "../../../components/spinner/spinner";
 
-const Lesson = ({ navigate }) => {
+const Lesson = () => {
   const [lesson, setLesson] = useState([]);
   const [id, setId] = useState(0);
   const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+  const navigate = useNavigate()
   const fetchData = () => {
     setIsLoading(true);
 
@@ -104,6 +104,6 @@ const Lesson = ({ navigate }) => {
     </Container>
   );
 
-  return <>{isLoading ? <Spinner /> : render}</>;
+  return <div>{isLoading ? <Spinner /> : render}</div>;
 };
 export default Lesson;

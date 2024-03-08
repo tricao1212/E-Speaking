@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Bounce, toast } from "react-toastify";
-const EditSentence = ({navigate}) => {
+const EditSentence = () => {
+    const navigate = useNavigate();
     const location = useLocation()
     const {data} = location.state;
     const [lessons, setLessons] = useState([]);

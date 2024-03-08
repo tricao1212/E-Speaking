@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
 
-const AddLesson = ({navigate}) => {
-
+const AddLesson = () => {
+    const navigate = useNavigate();
     const [lesson, setLesson] = useState('');
     const handleSubmit = (e) => {
         e.preventDefault();

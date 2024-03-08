@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using E_Speaking.Models;
 using E_Speaking.Data;
+using E_Speaking.Models;
 
 namespace E_Speaking.Controllers
 {

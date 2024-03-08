@@ -11,9 +11,9 @@ namespace E_Speaking.Models
         [MaxLength(20)]
         public string Content { get; set; }
 
-        [ForeignKey(nameof(Difficulty))]
-        public int DifficultyId { get; set; }
-        public Difficulty Difficulty { get; set; }
+        [ForeignKey(nameof(Lesson))]
+        public int LessonId { get; set; }
+        public Lesson Lesson { get; set; }
 
     }
 }

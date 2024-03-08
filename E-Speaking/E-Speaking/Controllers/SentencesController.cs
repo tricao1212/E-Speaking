@@ -25,19 +25,27 @@ namespace E_Speaking.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Sentence>>> GetSentence()
         {
-            return await _context.Sentence.Include(x => x.Difficulty).ToListAsync();
+          if (_context.Sentence == null)
+          {
+              return NotFound();
+          }
+            return await _context.Sentence.Include(x=>x.Lesson).ToListAsync();
         }
+
         // GET: api/Sentences/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Sentence>> GetSentence(int id)
         {
-            var sentence = await _context.Sentence.Include(x => x.Difficulty).FirstOrDefaultAsync(x => x.Id == id);
+          if (_context.Sentence == null)
+          {
+              return NotFound();
+          }
+            var sentence = await _context.Sentence.Include(x => x.Lesson).FirstOrDefaultAsync(x => x.Id == id);
 
             if (sentence == null)
             {
                 return NotFound();
             }
-
             return sentence;
         }
 
@@ -77,6 +85,10 @@ namespace E_Speaking.Controllers
         [HttpPost]
         public async Task<ActionResult<Sentence>> PostSentence(Sentence sentence)
         {
+          if (_context.Sentence == null)
+          {
+              return Problem("Entity set 'E_SpeakingContext.Sentence'  is null.");
+          }
             _context.Sentence.Add(sentence);
             await _context.SaveChangesAsync();
 
@@ -87,6 +99,10 @@ namespace E_Speaking.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSentence(int id)
         {
+            if (_context.Sentence == null)
+            {
+                return NotFound();
+            }
             var sentence = await _context.Sentence.FindAsync(id);
             if (sentence == null)
             {
@@ -101,7 +117,7 @@ namespace E_Speaking.Controllers
 
         private bool SentenceExists(int id)
         {
-            return _context.Sentence.Any(e => e.Id == id);
+            return (_context.Sentence?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

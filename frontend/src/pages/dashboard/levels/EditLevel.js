@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
 
-const EditLevel = ({navigate}) => {
+const EditLevel = () => {
+    const navigate = useNavigate();
     const location = useLocation();
     const {data} = location.state;
     const [level, setLevel] = useState(data.type);

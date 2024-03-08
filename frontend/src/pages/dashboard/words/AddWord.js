@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
 
-const AddWord = ({navigate}) => {
+const AddWord = () => {
+    const navigate = useNavigate();
     const [word, setWord] = useState('')
     const [lessons, setLessons] = useState([])
     const [lesson, setLesson] = useState(0)

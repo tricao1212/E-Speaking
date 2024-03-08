@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using E_Speaking.Data;
 using E_Speaking.Models;
+using System.Text.Json;
 
 namespace E_Speaking.Controllers
 {
@@ -25,14 +26,14 @@ namespace E_Speaking.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
-            return await _context.User.ToListAsync();
+            return await _context.User.Include(x => x.Processes).ToListAsync();
         }
 
         // GET: api/Auth/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(string id)
         {
-            var user = await _context.User.FindAsync(id);
+            var user = await _context.User.Include(x=>x.Processes).FirstOrDefaultAsync(x=>x.UID==id);
 
             if (user == null)
             {
@@ -48,7 +49,7 @@ namespace E_Speaking.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            var newUser = await _context.User.FindAsync(user.UID);
+            var newUser = await _context.User.Include(x=>x.Processes).FirstOrDefaultAsync(x=>x.UID.Equals(user.UID));
             if (newUser == null)
             {
                 newUser = new User
@@ -59,7 +60,7 @@ namespace E_Speaking.Controllers
                     Name = user.Name,
                     Role = 2
                 };
-            _context.User.Add(newUser);
+                _context.User.Add(newUser);
             }
             try
             {
@@ -79,7 +80,34 @@ namespace E_Speaking.Controllers
 
             return newUser;
         }
+        // PUT: api/Levels/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutUser(string id, User user)
+        {
+            if (id != user.UID)
+            {
+                return BadRequest();
+            }
+            _context.Entry(user).State = EntityState.Modified;
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
+            return NoContent();
+        }
         private bool UserExists(string id)
         {
             return _context.User.Any(e => e.UID == id);

@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../images/logo2.png";
 import style from "./adminsidebar.module.css";
 import { UserAuth } from "../../context/AuthContext";
@@ -34,37 +34,37 @@ const AdminSidebar = () => {
         sx={{ width: '100%', bgcolor: '#F0F8FF' }}
         component="nav" aria-labelledby="nested-list-subheader"
         >
-          <ListItemButton as={NavLink} to={'/admin'} className={style.text} selected={location.pathname === "/admin"} >
+          <ListItemButton as={Link} to={'/admin'} className={style.text} selected={location.pathname === "/admin"} >
             <ListItemIcon>
               <HomeOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItemButton>
-          <ListItemButton as={NavLink}  to={'/admin/words'} className={style.text} selected={location.pathname === "/admin/words"}>
+          <ListItemButton as={Link}  to={'/admin/words'} className={style.text} selected={location.pathname === "/admin/words"}>
             <ListItemIcon>
               <FontDownloadOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Words"  />
           </ListItemButton>
-          <ListItemButton as={NavLink} to={'/admin/sentences'} className={style.text} selected={location.pathname === "/admin/sentences"}>
+          <ListItemButton as={Link} to={'/admin/sentences'} className={style.text} selected={location.pathname === "/admin/sentences"}>
             <ListItemIcon>
               <AbcOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Sentences" />
           </ListItemButton>
-          <ListItemButton as={NavLink} to={'/admin/lessons'} className={style.text} selected={location.pathname === "/admin/difficulties"}>
+          <ListItemButton as={Link} to={'/admin/lessons'} className={style.text} selected={location.pathname === "/admin/lessons"}>
             <ListItemIcon>
               <LibraryBooksOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Lessons" />
           </ListItemButton>
-          <ListItemButton as={NavLink} to={'/admin/levels'} className={style.text} selected={location.pathname === "/admin/levels"}>
+          <ListItemButton as={Link} to={'/admin/levels'} className={style.text} selected={location.pathname === "/admin/levels"}>
             <ListItemIcon>
               <ScienceIcon />
             </ListItemIcon>
             <ListItemText primary="Level" />
           </ListItemButton>
-          <ListItemButton as={NavLink} to={'/admin/users'} className={style.text} selected={location.pathname === "/admin/users"}>
+          <ListItemButton as={Link} to={'/admin/users'} className={style.text} selected={location.pathname === "/admin/users"}>
             <ListItemIcon>
               <PersonPinOutlinedIcon />
             </ListItemIcon>

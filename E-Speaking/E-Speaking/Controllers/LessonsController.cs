@@ -12,47 +12,47 @@ namespace E_Speaking.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DifficultiesController : ControllerBase
+    public class LessonsController : ControllerBase
     {
         private readonly E_SpeakingContext _context;
 
-        public DifficultiesController(E_SpeakingContext context)
+        public LessonsController(E_SpeakingContext context)
         {
             _context = context;
         }
 
-        // GET: api/Difficulties
+        // GET: api/Lessons
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Difficulty>>> GetDifficulty()
+        public async Task<ActionResult<IEnumerable<Lesson>>> GetLesson()
         {
-            return await _context.Difficulty.ToListAsync();
+            return await _context.Lesson.ToListAsync();
         }
 
-        //GET: api/Difficulties/5
+        // GET: api/Lessons/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Difficulty>> GetDifficulty(int id)
+        public async Task<ActionResult<Lesson>> GetLesson(int id)
         {
-            var difficulty = await _context.Difficulty.FirstOrDefaultAsync(m => m.Id == id);
+            var lesson = await _context.Lesson.FindAsync(id);
 
-            if (difficulty == null)
+            if (lesson == null)
             {
                 return NotFound();
             }
 
-            return difficulty;
+            return lesson;
         }
 
-        // PUT: api/Difficulties/5
+        // PUT: api/Lessons/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDifficulty(int id, Difficulty difficulty)
+        public async Task<IActionResult> PutLesson(int id, Lesson lesson)
         {
-            if (id != difficulty.Id)
+            if (id != lesson.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(difficulty).State = EntityState.Modified;
+            _context.Entry(lesson).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace E_Speaking.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DifficultyExists(id))
+                if (!LessonExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace E_Speaking.Controllers
             return NoContent();
         }
 
-        // POST: api/Difficulties
+        // POST: api/Lessons
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Difficulty>> PostDifficulty(Difficulty difficulty)
+        public async Task<ActionResult<Lesson>> PostLesson(Lesson lesson)
         {
-            _context.Difficulty.Add(difficulty);
+            _context.Lesson.Add(lesson);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDifficulty", new { id = difficulty.Id }, difficulty);
+            return CreatedAtAction("GetLesson", new { id = lesson.Id }, lesson);
         }
 
-        // DELETE: api/Difficulties/5
+        // DELETE: api/Lessons/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDifficulty(int id)
+        public async Task<IActionResult> DeleteLesson(int id)
         {
-            var difficulty = await _context.Difficulty.FindAsync(id);
-            if (difficulty == null)
+            var lesson = await _context.Lesson.FindAsync(id);
+            if (lesson == null)
             {
                 return NotFound();
             }
 
-            _context.Difficulty.Remove(difficulty);
+            _context.Lesson.Remove(lesson);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool DifficultyExists(int id)
+        private bool LessonExists(int id)
         {
-            return _context.Difficulty.Any(e => e.Id == id);
+            return _context.Lesson.Any(e => e.Id == id);
         }
     }
 }
