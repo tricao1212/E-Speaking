@@ -106,7 +106,7 @@ const Words = () => {
                     </tbody>
                 </Table>
                 <Pagination>
-                    {Array.from({ length: Math.ceil(words.length / wordsPerPage) }).map((_, index) => (
+                    {Array.from({ length: Math.ceil(filteredWords.length / wordsPerPage) }).map((_, index) => (
                         <Pagination.Item
                             key={index}
                             active={index + 1 === currentPage}
