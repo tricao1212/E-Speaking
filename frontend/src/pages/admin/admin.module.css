@@ -2,12 +2,12 @@
     padding-left: 0;
 }
 .headerAd{
-    position: relative;
     padding: 0;
-    height: 7rem;
-    /* border-bottom: 1px solid black; */
-    margin-bottom: 5vh;
+    height: 5rem;
     background-color: lightskyblue;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 .sidebar{
     padding: 0;
@@ -19,9 +19,7 @@
 .adminAva{
     display: flex;
     font-size: x-large;
-    position: absolute;
-    right: 3%;
-    bottom: 20%;
+    padding-right: 24px;
 }
 
 .adminAva .avatar{

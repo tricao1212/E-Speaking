@@ -21,7 +21,7 @@ const Users = () => {
   const [isLoading, setIsLoading] = useState(false);
   const fetchData = () => {
     setIsLoading(true);
-    axios.get("http://localhost:5000/api/auth").then((response) => {
+    axios.get("http://34.136.63.21/api/auth").then((response) => {
       setUsers(response.data);
       setIsLoading(false);
     });

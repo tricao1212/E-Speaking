@@ -12,7 +12,7 @@ import HomeUser from "./pages/user/homeUser/HomeUser";
 function App() {
   return (
     <AuthContextProvider>
-      {/* <CheckRoute /> */}
+      <CheckRoute />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />

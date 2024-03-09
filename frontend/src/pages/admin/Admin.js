@@ -35,7 +35,7 @@ const Admin = () => {
               <div className={style.headerAd}>
                 <div className={style.adminAva}>
                   <Avatar className={style.avatar} src={user.avatar} />
-                  <p> {user.name}</p>
+                  {user.name}
                 </div>
               </div>
               <Routes>
