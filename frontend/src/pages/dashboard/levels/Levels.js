@@ -4,6 +4,9 @@ import { Button, Container, Modal, Table } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
 import Spinner from "../../../components/spinner/spinner";
+import { IconButton } from "@mui/material";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Levels = () => {
   const [levels, setLevels] = useState([]);
@@ -66,7 +69,7 @@ const Levels = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Table>
+      <Table bordered>
         <thead>
           <tr>
             <th>#</th>
@@ -80,20 +83,12 @@ const Levels = () => {
               <td>{index + 1}</td>
               <td>{item.type}</td>
               <td>
-                <Button
-                  variant="outline-warning"
-                  as={Link}
-                  to={"../levels/edit"}
-                  state={{ data: item }}
-                >
-                  Edit
-                </Button>
-                <Button
-                  variant="outline-danger"
-                  onClick={() => handleShow(item.id)}
-                >
-                  Delete
-                </Button>
+                <IconButton color="warning" aria-label="edit" onClick={()=>navigate("../levels/edit",{state: { data: item }})}>
+                  <EditIcon/>
+                </IconButton>
+                <IconButton color="error" aria-label="delete" onClick={() => handleShow(item.id)}>
+                  <DeleteIcon/>
+                </IconButton>
               </td>
             </tr>
           ))}

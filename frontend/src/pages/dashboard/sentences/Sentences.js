@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Table, Container, Button, Modal, Pagination, Row, Col } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
 import Spinner from "../../../components/spinner/spinner";
-import { Fab, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Fab, FormControl, IconButton, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import style from "./sentences.module.css"
 import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Sentences = () => {
   const [sentences, setSentences] = useState([]);
@@ -137,7 +139,7 @@ const Sentences = () => {
               <th>#</th>
               <th>Sentences</th>
               <th>Lesson</th>
-              <th></th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -147,20 +149,12 @@ const Sentences = () => {
                 <td>{item.content}</td>
                 <td>{item.lesson.name}</td>
                 <td>
-                  <Button
-                    variant="outline-warning"
-                    as={Link}
-                    to={"../sentences/edit"}
-                    state={{ data: item }}
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    variant="outline-danger"
-                    onClick={() => handleShow(item.id)}
-                  >
-                    Delete
-                  </Button>
+                  <IconButton color="warning" aria-label="edit" onClick={()=>navigate("../sentences/edit",{state: { data: item }})}>
+                    <EditIcon/>
+                  </IconButton>
+                  <IconButton color="error" aria-label="delete" onClick={() => handleShow(item.id)}>
+                    <DeleteIcon/>
+                  </IconButton>
                 </td>
               </tr>
             ))}
