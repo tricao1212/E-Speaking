@@ -40,25 +40,25 @@ const AdminSidebar = () => {
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItemButton>
-          <ListItemButton as={Link}  to={'/admin/words'} className={style.text} selected={location.pathname === "/admin/words"}>
+          <ListItemButton as={Link}  to={'/admin/words'} className={style.text} selected={location.pathname.includes("/admin/words")}>
             <ListItemIcon>
               <FontDownloadOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Words"  />
           </ListItemButton>
-          <ListItemButton as={Link} to={'/admin/sentences'} className={style.text} selected={location.pathname === "/admin/sentences"}>
+          <ListItemButton as={Link} to={'/admin/sentences'} className={style.text} selected={location.pathname.includes("/admin/sentences")}>
             <ListItemIcon>
               <AbcOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Sentences" />
           </ListItemButton>
-          <ListItemButton as={Link} to={'/admin/lessons'} className={style.text} selected={location.pathname === "/admin/lessons"}>
+          <ListItemButton as={Link} to={'/admin/lessons'} className={style.text} selected={location.pathname.includes("/admin/lessons")}>
             <ListItemIcon>
               <LibraryBooksOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Lessons" />
           </ListItemButton>
-          <ListItemButton as={Link} to={'/admin/levels'} className={style.text} selected={location.pathname === "/admin/levels"}>
+          <ListItemButton as={Link} to={'/admin/levels'} className={style.text} selected={location.pathname.includes("/admin/levels")}>
             <ListItemIcon>
               <ScienceIcon />
             </ListItemIcon>

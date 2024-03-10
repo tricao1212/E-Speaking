@@ -100,7 +100,7 @@ const Users = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Table>
+      <Table bordered>
         <thead>
           <tr>
             <th>#</th>

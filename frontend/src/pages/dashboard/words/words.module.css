@@ -4,5 +4,9 @@
     -moz-box-shadow: 0px 4px 5px 0px rgba(156,156,156,1);
     box-shadow: 0px 4px 5px 0px rgba(156,156,156,1);
     padding: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+}
+.addBtn {
+    display: flex;
+    justify-content: flex-end;
 }

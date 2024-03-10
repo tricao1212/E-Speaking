@@ -9,7 +9,7 @@ const EditSentence = () => {
     const {data} = location.state;
     const [lessons, setLessons] = useState([]);
     const [sentence, setSentence] = useState(data.content);
-    const [lesson, setLesson] = useState(data.difficultyId);
+    const [lesson, setLesson] = useState(data.lessonId);
 
     useEffect(()=> {
         axios.get("http://34.136.63.21/api/lessons")
