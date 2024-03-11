@@ -44,6 +44,7 @@ const Render = () => {
     } else {
       navigate("/user/learn/sentence/result", {
         state: {
+          lessonId: lessonId,
           correct: count,
           noOfWords: words.length,
           results: [...result, highlightedWord],
