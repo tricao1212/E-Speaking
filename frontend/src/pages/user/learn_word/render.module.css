@@ -1,0 +1,10 @@
+.card{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3rem;
+    width: 50%;
+}
+.btn{
+    margin-right: 10px;
+}
