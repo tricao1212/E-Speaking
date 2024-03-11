@@ -12,7 +12,7 @@ import SentenceLesson from "../learn_sentence/Render";
 import SentenceResult from "../learn_sentence/Result";
 import UserSidebar from "../../../components/userSidebar/userSidebar";
 import style from "./HomeUserCss.module.css";
-import Profile from "../profile/profile";
+import Profile from "../profile/Profile";
 function HomeUser() {
   return (
     <>
@@ -21,7 +21,7 @@ function HomeUser() {
           <Col className={style.sidebar} xs={2}>
             <UserSidebar/>
           </Col>
-          <Col  >
+          <Col className={style.content} >
             <Routes>
               <Route path="/learn" element={<Learn />} />
               <Route path="/profile" element={<Profile />} />

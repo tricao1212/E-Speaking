@@ -1,6 +1,9 @@
+import Card from "react-bootstrap/Card";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
+import style from "./render.module.css";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -89,35 +92,46 @@ const Render = () => {
     return <span>Browser doesn't support speech recognition.</span>;
   }
   return (
-    <div>
-      <p>Microphone: {listening ? "on" : "off"}</p>
-      <button
-        onTouchStart={startListening}
-        onMouseDown={startListening}
-        onTouchEnd={stopListening}
-        onMouseUp={stopListening}
-      >
-        Hold to talk
-      </button>
+    <Card className={style.card}>
+      <Card.Header>Lesson {lessonId}: </Card.Header>
+      <Card.Body>
+        <p>Microphone: {listening ? "on" : "off"}</p>
+        <Button
+          variant="outlined"
+          onTouchStart={startListening}
+          onMouseDown={startListening}
+          onTouchEnd={stopListening}
+          onMouseUp={stopListening}
+        >
+          Hold to talk
+        </Button>
 
-      {words[index] &&
-        (transcript ? (
-          <p style={{ color: "green" }}>
-            {
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: getHighlightedText().highlightedWord,
-                }}
-              />
-            }
-          </p>
-        ) : (
-          <p>{words[index].content}</p>
-        ))}
-
-      <button onClick={handlePrevious}>Previous</button>
-      <button onClick={handleNext}>Next</button>
-    </div>
+        {words[index] &&
+          (transcript ? (
+            <p style={{ color: "green" }}>
+              {
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: getHighlightedText().highlightedWord,
+                  }}
+                />
+              }
+            </p>
+          ) : (
+            <p>{words[index].content}</p>
+          ))}
+        <Button
+          className={style.btn}
+          variant="contained"
+          onClick={handlePrevious}
+        >
+          Previous
+        </Button>
+        <Button className={style.btn} variant="contained" onClick={handleNext}>
+          Next
+        </Button>
+      </Card.Body>
+    </Card>
   );
 };
 export default Render;

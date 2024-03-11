@@ -10,7 +10,8 @@ function Learn() {
         <Card.Header className={LearnCss.card_header}>
           Practice with word
         </Card.Header>
-        <Card.Body>
+        <Card.Body className={LearnCss.word}>
+          <p>Practice speaking with only one word.</p>
           <Link to="/user/learn/word">
             <Button className={LearnCss.btn} variant="outline-dark">
               Start
@@ -22,7 +23,8 @@ function Learn() {
         <Card.Header className={LearnCss.card_header}>
           Practice with sentence
         </Card.Header>
-        <Card.Body>
+        <Card.Body className={LearnCss.sentence}>
+          <p>Practice speaking with sentences.</p>
           <Link to="/user/learn/sentence">
             <Button className={LearnCss.btn} variant="outline-dark">
               Start
