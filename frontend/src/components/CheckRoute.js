@@ -10,7 +10,7 @@ const CheckRoute = () => {
       if(user.role===1)
         navigate("/admin");
       else {
-        navigate('/user')
+        navigate('/user/learn')
       }
     }
   }, [user]);

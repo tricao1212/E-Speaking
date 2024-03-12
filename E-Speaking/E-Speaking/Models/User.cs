@@ -11,5 +11,6 @@ namespace E_Speaking.Models
         public string Name { get; set; }
         public int Role { get; set; }
         public ICollection<Process> Processes { get; set; }
+        public int Point { get ; set; }
     }
 }

@@ -6,5 +6,25 @@
     width: 50%;
 }
 .btn{
-    margin-right: 10px;
+    width: 100px;
+}
+.cardBody {
+    text-align: center;
+}
+
+.actionBtn{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.cardBody .iconBtn{
+    font-size: 100px;
+    background-color: aliceblue;
+}
+
+.content{
+    display: flex;
+    justify-content: center;
 }
