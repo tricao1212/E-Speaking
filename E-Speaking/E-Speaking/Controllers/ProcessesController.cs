@@ -78,12 +78,13 @@ namespace E_Speaking.Controllers
         [HttpPost]
         public async Task<ActionResult<Process>> PostProcess(Process process)
         {
-            if (_context.Process.Contains(process))
+            var p = await _context.Process.FirstOrDefaultAsync(x=>x.LessonId==process.LessonId && x.UserUID.Equals(process.UserUID));
+            if (p != null)
             {
-                Process p = _context.Process.FirstOrDefault(x => x.Id == process.Id);
                 if (p.Progress < process.Progress)
                 {
                     p.Progress = process.Progress;
+                    p.AttemptTime = DateTime.Now;
                     _context.Process.Update(p);
                 }
             }
@@ -92,6 +93,7 @@ namespace E_Speaking.Controllers
                 process.AttemptTime = DateTime.Now;
                 _context.Process.Add(process);
             }
+            
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetProcess", new { id = process.Id }, process);

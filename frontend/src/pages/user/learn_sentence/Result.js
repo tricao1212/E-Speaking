@@ -11,7 +11,7 @@ const Result = () => {
   const [listProcess, setListProcess] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5267/api/processes")
+      .get("http://localhost:5000/api/processes")
       .then((response) => {
         setListProcess(response.data);
       })

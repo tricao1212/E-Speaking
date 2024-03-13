@@ -18,7 +18,7 @@ const Result = () => {
         progress: (correct * 100 ) / noOfWords,
         type: "word"
     }
-    axios.post("https://localhost:7149/api/processes",process)
+    axios.post("https://localhost:5000/api/processes",process)
     .then(response => {
         console.log(response.data);
         navigate("/user/learn/word");
