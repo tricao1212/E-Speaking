@@ -15,7 +15,8 @@ const Render = () => {
   const [count, setCount] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
-  const { lessonId } = location.state;
+  const { lessonId, lessonName } = location.state;
+  console.log(lessonName)
   const {
     transcript,
     listening,
