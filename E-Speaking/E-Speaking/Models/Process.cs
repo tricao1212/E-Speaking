@@ -11,5 +11,6 @@ namespace E_Speaking.Models
         public int LessonId { get; set; }
         public int Progress {  get; set; }
         public DateTime AttemptTime { get; set; }
+        public string Type { get; set; }
     }
 }

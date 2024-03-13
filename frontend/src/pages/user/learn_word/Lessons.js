@@ -5,15 +5,20 @@ import Card from "react-bootstrap/Card";
 import Button from "@mui/material/Button";
 import style from "./lesson.module.css";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
+import Spinner from "../../../components/spinner/spinner";
 
 const Lessons = () => {
   const [lessons, setLessons] = useState([]);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get("http://34.136.63.21/api/lessons")
       .then((response) => {
         setLessons(response.data);
+        setIsLoading(false);
       })
       .catch((e) => console.log(e));
   }, []);
@@ -23,7 +28,7 @@ const Lessons = () => {
   const back = () => {
     navigate("/user/learn");
   };
-  return (
+  const render = (
     <>
       <div className={style.back}>
         <Button
@@ -50,5 +55,6 @@ const Lessons = () => {
       </div>
     </>
   );
+  return <>{isLoading ? <Spinner /> : render}</>;
 };
 export default Lessons;
