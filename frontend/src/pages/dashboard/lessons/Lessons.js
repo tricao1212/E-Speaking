@@ -75,7 +75,7 @@ const Lesson = () => {
           <tr>
             <th>#</th>
             <th>Name</th>
-            <th></th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
