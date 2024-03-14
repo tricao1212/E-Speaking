@@ -15,7 +15,8 @@ const Render = () => {
   const [count, setCount] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
-  const { lessonId } = location.state;
+  const { lessonId, lessonName } = location.state;
+  console.log(lessonName)
   const {
     transcript,
     listening,
@@ -48,6 +49,7 @@ const Render = () => {
     } else {
       navigate("/user/learn/sentence/result", {
         state: {
+          lessonId: lessonId,
           correct: count,
           noOfWords: words.length,
           results: [...result, highlightedWord],

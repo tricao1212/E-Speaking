@@ -13,6 +13,7 @@ import SentenceResult from "../learn_sentence/Result";
 import UserSidebar from "../../../components/userSidebar/userSidebar";
 import style from "./HomeUserCss.module.css";
 import Profile from "../profile/Profile";
+
 function HomeUser() {
   return (
     <>

@@ -18,7 +18,7 @@ const Lessons = () => {
       .catch((e) => console.log(e));
   }, []);
   const handleClick = (item) => {
-    navigate("/user/learn/sentence/lesson", { state: { lessonId: item } });
+    navigate("/user/learn/sentence/lesson", { state: { lessonId: item.id, lessonName: item.name } });
   };
   const back = () => {
     navigate("/user/learn");
@@ -40,7 +40,7 @@ const Lessons = () => {
             Lesson {index + 1}: {item.name}
           </Card.Header>
           <Card.Body>
-            <Button onClick={() => handleClick(item.id)} variant="contained">
+            <Button onClick={() => handleClick(item)} variant="contained">
               Start
             </Button>
           </Card.Body>
