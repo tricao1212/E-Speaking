@@ -1,10 +1,13 @@
+import Card from "react-bootstrap/Card";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Card from "react-bootstrap/Card";
 import Button from "@mui/material/Button";
-import style from "../learn_word/render.module.css";
-
+import style from "./render.module.css";
+import IconButton from "@mui/material/IconButton";
+import Spinner from "../../../components/spinner/spinner";
+import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -15,8 +18,12 @@ const Render = () => {
   const [count, setCount] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
-  const { lessonId, lessonName } = location.state;
-  console.log(lessonName)
+  const { lessonId, type } = location.state;
+  const [isLoading, setIsLoading] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [paragraphColor, setParagraphColor] = useState("#000");
+  let speech = new SpeechSynthesisUtterance();
+  speech.voice = window.speechSynthesis.getVoices()[1];
   const {
     transcript,
     listening,
@@ -24,35 +31,42 @@ const Render = () => {
     browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
   useEffect(() => {
-    axios
-      .get("http://34.136.63.21/api/sentences")
+    setIsLoading(true);
+    axios.get("http://34.136.63.21/api/"+type)
       .then((response) => {
         const filteredWords = response.data.filter(
           (word) => word.lessonId === lessonId
         );
         setWords(filteredWords);
+        setIsLoading(false);
       })
       .catch((e) => console.error(e));
   }, []);
   const [index, setIndex] = useState(0);
-  const handlePrevious = () => {
-    if (index > 0) {
-      setIndex(index - 1);
-    }
+  const handleListen= () => {
+    speech.text = words[index].content;
+    window.speechSynthesis.speak(speech)
+  }
+  const handleSkip = () => {
+    setIsButtonDisabled(true);
+    setParagraphColor("red");
   };
   const handleNext = () => {
     const { highlightedWord } = getHighlightedText();
     setResult((prev) => [...prev, highlightedWord]);
     resetTranscript();
+    setIsButtonDisabled(false);
+    setParagraphColor("#000");
     if (index + 1 < words.length) {
       setIndex(index + 1);
     } else {
-      navigate("/user/learn/sentence/result", {
+      navigate("/study/result", {
         state: {
-          lessonId: lessonId,
           correct: count,
           noOfWords: words.length,
           results: [...result, highlightedWord],
+          lessonId: lessonId,
+          type: type
         },
       });
     }
@@ -61,8 +75,8 @@ const Render = () => {
     resetTranscript();
     SpeechRecognition.startListening({ continuous: true });
   };
-  const stopListening = () => {
-    SpeechRecognition.stopListening();
+  const stopListening = async () => {
+    await SpeechRecognition.stopListening();
     countCorrectAnswer();
   };
 
@@ -94,47 +108,60 @@ const Render = () => {
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn't support speech recognition.</span>;
   }
-  return (
+  const render = (
     <Card className={style.card}>
       <Card.Header>Lesson {lessonId}: </Card.Header>
-      <Card.Body>
-        <p>Microphone: {listening ? "on" : "off"}</p>
-        <Button
-          variant="outlined"
+      <Card.Body className={style.cardBody}>
+        <div className={style.content}>
+          {words[index] &&
+            (transcript ? (
+              <h1 style={{ color: "green" }}>
+                {
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: getHighlightedText().highlightedWord,
+                    }}
+                  />
+                }
+              </h1>
+            ) : (
+              <h1 style={{ color: paragraphColor }}>{words[index].content}</h1>
+            ))}
+          <IconButton onClick={handleListen}>
+            <VolumeUpIcon />
+          </IconButton>
+        </div>
+        <IconButton
           onTouchStart={startListening}
           onMouseDown={startListening}
           onTouchEnd={stopListening}
           onMouseUp={stopListening}
+          className={style.iconBtn}
+          disabled={isButtonDisabled}
         >
-          Hold to talk
-        </Button>
-
-        {words[index] &&
-          (transcript ? (
-            <p style={{ color: "green" }}>
-              {
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: getHighlightedText().highlightedWord,
-                  }}
-                />
-              }
-            </p>
-          ) : (
-            <p>{words[index].content}</p>
-          ))}
-        <Button
-          className={style.btn}
-          variant="contained"
-          onClick={handlePrevious}
-        >
-          Previous
-        </Button>
-        <Button className={style.btn} variant="contained" onClick={handleNext}>
-          Next
-        </Button>
+          <KeyboardVoiceIcon fontSize="inherit" />
+        </IconButton>
+        <p>Hold to talk</p>
+        <p>Microphone: {listening ? "on" : "off"}</p>
+        <div className={style.actionBtn}>
+          <Button
+            className={style.btn}
+            variant="contained"
+            onClick={handleSkip}
+          >
+            Skip
+          </Button>
+          <Button
+            className={style.btn}
+            variant="contained"
+            onClick={handleNext}
+          >
+            Next
+          </Button>
+        </div>
       </Card.Body>
     </Card>
   );
+  return <>{isLoading ? <Spinner /> : render}</>;
 };
 export default Render;

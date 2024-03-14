@@ -27,10 +27,12 @@ namespace E_Speaking.Controllers
         {
             return await _context.Process.ToListAsync();
         }
-        [HttpGet("{type}")]
-        public async Task<ActionResult<IEnumerable<Process>>> GetProcessByType(string type)
+
+        // GET: api/Processes/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Process>> GetProcess(int id)
         {
-            var process = await _context.Process.Where(x => x.Type == type).ToListAsync();
+            var process = await _context.Process.FindAsync(id);
 
             if (process == null)
             {

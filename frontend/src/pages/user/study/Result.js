@@ -9,19 +9,19 @@ import axios from "axios";
 const Result = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { correct, noOfWords, results, lessonId } = location.state;
+  const { correct, noOfWords, results, lessonId, type } = location.state;
   const {user} = UserAuth();
   const handleSubmit = () => {
     const process = {
         userUID: user.uid,
         lessonId: lessonId,
         progress: (correct * 100 ) / noOfWords,
-        type: "word"
+        type: type
     }
-    axios.post("https://localhost:5000/api/processes",process)
+    axios.post("http://34.136.63.21/api/processes",process)
     .then(response => {
         console.log(response.data);
-        navigate("/user/learn/word");
+        navigate("/user/learn/lessons", {state:{type: type}});
     })
     .catch(error=>{
         console.error("Error: ", error);
