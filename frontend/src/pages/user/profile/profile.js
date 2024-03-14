@@ -9,9 +9,7 @@ const Profile = () => {
   const { user } = UserAuth();
   const [avatar, setAvatar] = useState(user.avatar);
 
-  console.log(avatar);
   const onDrop = (acceptedFiles) => {
-    // Xử lý file được chấp nhận ở đây
     const file = acceptedFiles[0];
     const reader = new FileReader();
     reader.onload = () => {
@@ -30,7 +28,7 @@ const Profile = () => {
         {isDragActive ? (
           <p>Thả ảnh vào đây...</p>
         ) : (
-          <p>Kéo và thả ảnh hoặc nhấp để chọn ảnh.</p>
+          <p>Drag and drop photos or click to select photos.</p>
         )}
         {avatar && (
           <div className={style.avatar_preview}>

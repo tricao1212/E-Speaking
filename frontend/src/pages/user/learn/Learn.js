@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
+import Button from '@mui/material/Button';
 import LearnCss from "./LearnCss.module.css";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
@@ -13,7 +13,7 @@ function Learn() {
         <Card.Body className={LearnCss.word}>
           <p>Practice speaking with only one word.</p>
           <Link to="/user/learn/word">
-            <Button className={LearnCss.btn} variant="outline-dark">
+            <Button className={LearnCss.btn} variant="contained">
               Start
             </Button>{" "}
           </Link>
@@ -26,7 +26,7 @@ function Learn() {
         <Card.Body className={LearnCss.sentence}>
           <p>Practice speaking with sentences.</p>
           <Link to="/user/learn/sentence">
-            <Button className={LearnCss.btn} variant="outline-dark">
+            <Button className={LearnCss.btn} variant="contained">
               Start
             </Button>{" "}
           </Link>

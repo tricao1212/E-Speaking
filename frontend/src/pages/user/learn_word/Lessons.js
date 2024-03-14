@@ -6,11 +6,16 @@ import Button from "@mui/material/Button";
 import style from "./lesson.module.css";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import Spinner from "../../../components/spinner/spinner";
+import { UserAuth } from "../../../context/AuthContext";
 
 const Lessons = () => {
   const [lessons, setLessons] = useState([]);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const {user} = UserAuth();
+  const [progress, setProgress] = useState(user.processes.filter(p => p.type.includes("word")));
+  
+  console.log(progress);
 
   useEffect(() => {
     setIsLoading(true);
@@ -22,12 +27,14 @@ const Lessons = () => {
       })
       .catch((e) => console.log(e));
   }, []);
+  
   const handleClick = (item) => {
     navigate("/user/learn/word/lesson", { state: { lessonId: item } });
   };
   const back = () => {
     navigate("/user/learn");
   };
+
   const render = (
     <>
       <div className={style.back}>
@@ -43,7 +50,7 @@ const Lessons = () => {
         {lessons.map((item, index) => (
           <Card className={style.card} key={index}>
             <Card.Header>
-              Lesson {index + 1}: {item.name}
+              Lesson {index + 1}: {item.name} 
             </Card.Header>
             <Card.Body>
               <Button onClick={() => handleClick(item.id)} variant="contained">

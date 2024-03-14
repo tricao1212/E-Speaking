@@ -1,6 +1,7 @@
 .option .btn{
     margin-top: 3rem;
     width: 10rem;
+    background-color: black;
 }
 
 .option{
@@ -14,4 +15,12 @@
 
 .card_header{
     font-weight: bold;
+}
+
+.word{
+    background-image: url('../../../images/word.png');
+}
+
+.sentence{
+    background-image: url('../../../images/word.png');
 }
