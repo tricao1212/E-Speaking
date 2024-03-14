@@ -12,10 +12,10 @@ function Learn() {
         </Card.Header>
         <Card.Body className={LearnCss.word}>
           <p>Practice speaking with only one word.</p>
-          <Link to="/user/learn/word">
+          <Link to="/user/learn/lessons" state={{type: "words"}}>
             <Button className={LearnCss.btn} variant="contained">
               Start
-            </Button>{" "}
+            </Button>
           </Link>
         </Card.Body>
       </Card>
@@ -25,10 +25,10 @@ function Learn() {
         </Card.Header>
         <Card.Body className={LearnCss.sentence}>
           <p>Practice speaking with sentences.</p>
-          <Link to="/user/learn/sentence">
+          <Link to="/user/learn/lessons" state={{type: "sentences"}}>
             <Button className={LearnCss.btn} variant="contained">
               Start
-            </Button>{" "}
+            </Button>
           </Link>
         </Card.Body>
       </Card>

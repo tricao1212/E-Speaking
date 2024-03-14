@@ -4,15 +4,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Learn from "../learn/Learn";
 import { Routes, Route } from "react-router-dom";
-import LearnWord from "../learn_word/Lessons";
-import Wordlesson from "../learn_word/Render";
-import Result from "../learn_word/Result";
-import LearnSentence from "../learn_sentence/Lessons";
-import SentenceLesson from "../learn_sentence/Render";
-import SentenceResult from "../learn_sentence/Result";
 import UserSidebar from "../../../components/userSidebar/userSidebar";
 import style from "./HomeUserCss.module.css";
 import Profile from "../profile/Profile";
+import Lessons from "../study/Lessons";
 
 function HomeUser() {
   return (
@@ -26,12 +21,7 @@ function HomeUser() {
             <Routes>
               <Route path="/learn" element={<Learn />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/learn/word" element={<LearnWord />} />
-              <Route path="/learn/word/lesson" element={<Wordlesson />} />
-              <Route path="/learn/word/result" element={<Result />} />
-              <Route path="/learn/sentence" element={<LearnSentence />} />
-              <Route path="/learn/sentence/lesson" element={<SentenceLesson />} />
-              <Route path="/learn/sentence/result" element={<SentenceResult />} />
+              <Route path="/learn/lessons" element={<Lessons/>}/>
             </Routes>
           </Col>
         </Row>

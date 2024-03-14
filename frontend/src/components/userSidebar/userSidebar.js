@@ -31,19 +31,19 @@ const AdminSidebar = () => {
         sx={{ width: '100%', bgcolor: '#F0F8FF' }}
         component="nav" aria-labelledby="nested-list-subheader"
         >
-          <ListItemButton as={NavLink} to={'/user/learn'} className={style.text} selected={location.pathname === "/user/learn"} >
+          <ListItemButton as={NavLink} to={'/user/learn'} className={style.text} selected={location.pathname.includes("/user/learn")} >
             <ListItemIcon>
               <HomeOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Learn" />
           </ListItemButton>
-          <ListItemButton as={NavLink}  to={'/user/profile'} className={style.text} selected={location.pathname === "/user/profile"}>
+          <ListItemButton as={NavLink}  to={'/user/profile'} className={style.text} selected={location.pathname.includes("/user/profile")}>
             <ListItemIcon>
               <FontDownloadOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Profile"  />
           </ListItemButton>
-          <ListItemButton as={NavLink} to={'/user/ranking'} className={style.text} selected={location.pathname === "/user/ranking"}>
+          <ListItemButton as={NavLink} to={'/user/ranking'} className={style.text} selected={location.pathname.includes("/user/ranking")}>
             <ListItemIcon>
               <AbcOutlinedIcon />
             </ListItemIcon>
