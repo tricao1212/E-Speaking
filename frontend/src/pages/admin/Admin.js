@@ -17,7 +17,7 @@ import EditLesson from "../dashboard/lessons/EditLesson";
 import style from "./admin.module.css";
 import EditLevel from "../dashboard/levels/EditLevel";
 import Avatar from "@mui/material/Avatar";
-import Users from "../dashboard/user_info/user";
+import Users from "../dashboard/user_info/User";
 import { UserAuth } from "../../context/AuthContext";
 
 const Admin = () => {

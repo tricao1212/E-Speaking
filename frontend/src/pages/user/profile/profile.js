@@ -26,7 +26,7 @@ const Profile = () => {
       <div {...getRootProps()} className={style.dropzone}>
         <input {...getInputProps()} />
         {isDragActive ? (
-          <p>Thả ảnh vào đây...</p>
+          <p>Drop image here...</p>
         ) : (
           <p>Drag and drop photos or click to select photos.</p>
         )}

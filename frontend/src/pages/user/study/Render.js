@@ -8,9 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import Spinner from "../../../components/spinner/spinner";
 import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
-import SpeechRecognition, {
-  useSpeechRecognition,
-} from "react-speech-recognition";
+import SpeechRecognition, {useSpeechRecognition} from "react-speech-recognition";
 
 const Render = () => {
   const [words, setWords] = useState([]);
@@ -109,58 +107,60 @@ const Render = () => {
     return <span>Browser doesn't support speech recognition.</span>;
   }
   const render = (
-    <Card className={style.card}>
-      <Card.Header>Lesson {lessonId}: </Card.Header>
-      <Card.Body className={style.cardBody}>
-        <div className={style.content}>
-          {words[index] &&
-            (transcript ? (
-              <h1 style={{ color: "green" }}>
-                {
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: getHighlightedText().highlightedWord,
-                    }}
-                  />
-                }
-              </h1>
-            ) : (
-              <h1 style={{ color: paragraphColor }}>{words[index].content}</h1>
-            ))}
-          <IconButton onClick={handleListen}>
-            <VolumeUpIcon />
+    <div className={style.background}>
+      <Card className={style.card}>
+        <Card.Header>Lesson {lessonId}: </Card.Header>
+        <Card.Body className={style.cardBody}>
+          <div className={style.content}>
+            {words[index] &&
+              (transcript ? (
+                <h1 style={{ color: "green" }}>
+                  {
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: getHighlightedText().highlightedWord,
+                      }}
+                    />
+                  }
+                </h1>
+              ) : (
+                <h1 style={{ color: paragraphColor }}>{words[index].content}</h1>
+              ))}
+            <IconButton onClick={handleListen}>
+              <VolumeUpIcon />
+            </IconButton>
+          </div>
+          <IconButton
+            onTouchStart={startListening}
+            onMouseDown={startListening}
+            onTouchEnd={stopListening}
+            onMouseUp={stopListening}
+            className={style.iconBtn}
+            disabled={isButtonDisabled}
+          >
+            <KeyboardVoiceIcon fontSize="inherit" />
           </IconButton>
-        </div>
-        <IconButton
-          onTouchStart={startListening}
-          onMouseDown={startListening}
-          onTouchEnd={stopListening}
-          onMouseUp={stopListening}
-          className={style.iconBtn}
-          disabled={isButtonDisabled}
-        >
-          <KeyboardVoiceIcon fontSize="inherit" />
-        </IconButton>
-        <p>Hold to talk</p>
-        <p>Microphone: {listening ? "on" : "off"}</p>
-        <div className={style.actionBtn}>
-          <Button
-            className={style.btn}
-            variant="contained"
-            onClick={handleSkip}
-          >
-            Skip
-          </Button>
-          <Button
-            className={style.btn}
-            variant="contained"
-            onClick={handleNext}
-          >
-            Next
-          </Button>
-        </div>
-      </Card.Body>
-    </Card>
+          <p>Hold to talk</p>
+          <p>Microphone: {listening ? "on" : "off"}</p>
+          <div className={style.actionBtn}>
+            <Button
+              className={style.btn}
+              variant="contained"
+              onClick={handleSkip}
+            >
+              Skip
+            </Button>
+            <Button
+              className={style.btn}
+              variant="contained"
+              onClick={handleNext}
+            >
+              Next
+            </Button>
+          </div>
+        </Card.Body>
+      </Card>
+    </div>
   );
   return <>{isLoading ? <Spinner /> : render}</>;
 };

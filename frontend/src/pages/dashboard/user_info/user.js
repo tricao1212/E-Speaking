@@ -10,6 +10,7 @@ import {
 } from "react-bootstrap";
 import Spinner from "../../../components/spinner/spinner";
 import { Bounce, toast } from "react-toastify";
+import style from "./user.module.css"
 
 const Users = () => {
   const [user, setUser] = useState({});
@@ -100,7 +101,7 @@ const Users = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Table bordered>
+      <Table className={style.usertable} bordered>
         <thead>
           <tr>
             <th>#</th>
