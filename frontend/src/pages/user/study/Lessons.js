@@ -53,7 +53,7 @@ const Lessons = () => {
                 Lesson {index + 1}: {item.name}
               {lessonProgress && (
                 <b>{lessonProgress.progress}%</b>
-                )}
+              )}
               </div>
             </Card.Header>
             <Card.Body>
