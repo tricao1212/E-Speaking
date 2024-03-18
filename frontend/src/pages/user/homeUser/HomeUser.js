@@ -7,6 +7,8 @@ import UserSidebar from "../../../components/userSidebar/userSidebar";
 import style from "./HomeUserCss.module.css";
 import Profile from "../profile/Profile";
 import Lessons from "../study/Lessons";
+import Ranking from "../ranking/Ranking";
+
 
 function HomeUser() {
   return (
@@ -20,6 +22,7 @@ function HomeUser() {
             <Route path="/learn" element={<Learn />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/learn/lessons" element={<Lessons/>}/>
+            <Route path="/ranking" element={<Ranking/>}/>
           </Routes>
         </Col>
       </Row>

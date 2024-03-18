@@ -8,5 +8,7 @@ namespace E_Speaking.Models
 
         [Required]
         public string Type { get; set; }
+
+        public int RangePoint { get; set; }
     }
 }

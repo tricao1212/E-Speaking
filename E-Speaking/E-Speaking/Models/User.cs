@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace E_Speaking.Models
 {
@@ -12,5 +13,6 @@ namespace E_Speaking.Models
         public int Role { get; set; }
         public ICollection<Process> Processes { get; set; }
         public int Point { get ; set; }
+
     }
 }

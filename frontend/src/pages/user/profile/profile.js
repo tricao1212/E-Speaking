@@ -2,12 +2,25 @@ import React from "react";
 import { UserAuth } from "../../../context/AuthContext";
 import style from "./profile.module.css";
 import { useDropzone } from "react-dropzone";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
+import axios from "axios";
 
 const Profile = () => {
   const { user } = UserAuth();
   const [avatar, setAvatar] = useState(user.avatar);
+  const [level, setLevel] = useState("");
+  const fetchData = () => {
+    axios
+      .get("https://localhost:7149/api/point/" + user.point)
+      .then((response) => {
+        setLevel(response.data);
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const onDrop = (acceptedFiles) => {
     const file = acceptedFiles[0];
@@ -22,7 +35,7 @@ const Profile = () => {
 
   return (
     <div className={style.centerBlock}>
-      <h2>Level: </h2>
+      <h2>Level: <span className={style.color}>{level}</span> </h2>
       <div {...getRootProps()} className={style.dropzone}>
         <input {...getInputProps()} />
         {isDragActive ? (
@@ -42,7 +55,7 @@ const Profile = () => {
           </div>
         )}
       </div>
-      <h2>Point: </h2>
+      <h2>Point: <span className={style.color}>{user.point}</span></h2>
       <div className={style.block}>
         <h4>Name: {user.name}</h4>
       </div>

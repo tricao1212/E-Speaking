@@ -1,0 +1,32 @@
+.second{
+    border: 1px solid black;
+    height: 40vh;
+    border-radius: 10%;
+}
+.first{
+    border: 1px solid black;
+    height: 50vh;
+    border-radius: 10%;
+
+}
+
+.third{
+    border: 1px solid black;
+    height: 30vh;
+    border-radius: 10%;
+}
+
+.rankBoard{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+.rankTable{
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 10vh 30vh 10vh 30vh;
+}
+.rankTable h2{
+    text-align: center;
+}

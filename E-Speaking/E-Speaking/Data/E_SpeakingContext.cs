@@ -20,5 +20,6 @@ namespace E_Speaking.Data
         public DbSet<E_Speaking.Models.Level> Level { get; set; }
         public DbSet<E_Speaking.Models.Lesson> Lesson { get; set; }
         public DbSet<E_Speaking.Models.Process> Process { get; set; }
+
     }
 }

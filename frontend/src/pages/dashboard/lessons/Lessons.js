@@ -101,7 +101,7 @@ const Lesson = () => {
                 <td>{index + 1}</td>
                 <td>{item.name}</td>
                 <td>
-                <IconButton color="warning" aria-label="edit" onClick={()=>navigate("../lessons/edit",{state: { data: item }})}>
+                <IconButton color="primary" aria-label="edit" onClick={()=>navigate("../lessons/edit",{state: { data: item }})}>
                     <EditIcon/>
                   </IconButton>
                   <IconButton color="error" aria-label="delete" onClick={() => handleShow(item.id)}>

@@ -78,19 +78,25 @@ namespace E_Speaking.Controllers
         [HttpPost]
         public async Task<ActionResult<Process>> PostProcess(Process process)
         {
+            var user = await _context.User.FirstOrDefaultAsync(x => x.UID.Equals(process.UserUID));
             var p = await _context.Process.FirstOrDefaultAsync(x=>x.LessonId==process.LessonId && x.UserUID.Equals(process.UserUID));
             if (p != null)
             {
                 if (p.Progress < process.Progress)
                 {
+                    int temp = process.Progress - p.Progress;
                     p.Progress = process.Progress;
+                    user.Point += temp;
+                    _context.User.Update(user);
                     p.AttemptTime = DateTime.Now;
                     _context.Process.Update(p);
                 }
             }
             else
             {
+                user.Point += process.Progress;
                 process.AttemptTime = DateTime.Now;
+                _context.User.Update(user);
                 _context.Process.Add(process);
             }
             
