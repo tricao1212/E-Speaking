@@ -114,7 +114,7 @@ const Render = () => {
           <div className={style.content}>
             {words[index] &&
               (transcript ? (
-                <h1 style={{ color: "green" }}>
+                <h2 style={{ color: "green" }}>
                   {
                     <div
                       dangerouslySetInnerHTML={{
@@ -122,9 +122,9 @@ const Render = () => {
                       }}
                     />
                   }
-                </h1>
+                </h2>
               ) : (
-                <h1 style={{ color: paragraphColor }}>{words[index].content}</h1>
+                <h2 style={{ color: paragraphColor }}>{words[index].content}</h2>
               ))}
             <IconButton onClick={handleListen}>
               <VolumeUpIcon />

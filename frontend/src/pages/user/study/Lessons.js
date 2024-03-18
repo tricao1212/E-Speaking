@@ -7,6 +7,7 @@ import style from "./lesson.module.css";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import Spinner from "../../../components/spinner/spinner";
 import { UserAuth } from "../../../context/AuthContext";
+import { ProgressBar } from "react-bootstrap";
 
 const Lessons = () => {
   const [lessons, setLessons] = useState([]);
@@ -15,7 +16,7 @@ const Lessons = () => {
   const {type} = location.state;
   const [isLoading, setIsLoading] = useState(false);
   const {user} = UserAuth();
-  const processes = user.processes.filter(p => p.type.includes(type));
+  const [processes, setProcesses] = useState([]);
   useEffect(() => {
     setIsLoading(true);
     axios.get("http://34.136.63.21/api/lessons")
@@ -24,6 +25,11 @@ const Lessons = () => {
         setIsLoading(false);
       })
       .catch((e) => console.log(e));
+    axios.get("http://34.136.63.21/api/auth/"+user.uid)
+    .then((response)=> {
+      setProcesses(response.data.processes.filter(p => p.type.includes(type)))
+    })
+    .catch((e) => console.log(e));
   }, []);
   const handleClick = (item) => {
     navigate("/study", { state: { lessonId: item, type: type } });
@@ -51,15 +57,18 @@ const Lessons = () => {
             <Card.Header>
               <div className={style.headerbox}>
                 Lesson {index + 1}: {item.name}
-              {lessonProgress && (
+              {lessonProgress!==undefined ? (
                 <b>{lessonProgress.progress}%</b>
+              ):(
+                <b>0%</b>
               )}
               </div>
             </Card.Header>
             <Card.Body>
-              <Button onClick={() => handleClick(item.id)} variant="contained">
-                Start
-              </Button>
+              <div className={style.progressbar}>
+                <ProgressBar variant="success" now={lessonProgress!==undefined?lessonProgress.progress:0} />
+              </div>
+                <Button onClick={() => handleClick(item.id)} variant="contained">Start</Button>
             </Card.Body>
           </Card>
         )})}

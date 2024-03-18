@@ -27,10 +27,9 @@ export const AuthContextProvider = ({ children }) => {
       avatar: signedUser.photoURL,
       email: signedUser.email,
       name: signedUser.displayName,
-      role: 2,
+      role: 2
     };
-    await axios
-      .post("http://34.136.63.21/api/auth", newUser)
+    await axios.post("http://34.136.63.21/api/auth", newUser)
       .then((response) => setUser(response.data))
       .catch((e) => console.log(e));
   };
