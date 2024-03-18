@@ -8,9 +8,12 @@
 }
 .sidebar{
     position: relative;
-    /* border-right: 1px solid black; */
     height: 100vh;
     background-color: aliceblue;
+}
+.fixed {
+    position: fixed;
+    width: 16.666666667%
 }
 .option button{
     display: flex;
@@ -35,7 +38,5 @@
 
 .sidebar .logOut{
     position: absolute;
-    bottom: 0;
-    width: 97%;
-    margin-bottom: 20px;
+    bottom: 10px;
 }

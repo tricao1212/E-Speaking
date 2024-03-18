@@ -12,3 +12,6 @@
     display: flex;
     justify-content: space-between;
 }
+.progressbar {
+    margin-bottom: 20px;
+}

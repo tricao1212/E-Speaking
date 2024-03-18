@@ -1,4 +1,3 @@
-import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -11,22 +10,20 @@ import Lessons from "../study/Lessons";
 
 function HomeUser() {
   return (
-    <>
-      <Container fluid className="main">
-        <Row>
-          <Col className={style.sidebar} xs={2}>
-            <UserSidebar/>
-          </Col>
-          <Col className={style.content} >
-            <Routes>
-              <Route path="/learn" element={<Learn />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/learn/lessons" element={<Lessons/>}/>
-            </Routes>
-          </Col>
-        </Row>
-      </Container>
-    </>
+    <Container fluid className="main">
+      <Row>
+        <Col className={style.sidebar} xs={2}>
+          <UserSidebar/>
+        </Col>
+        <Col className={style.content} >
+          <Routes>
+            <Route path="/learn" element={<Learn />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/learn/lessons" element={<Lessons/>}/>
+          </Routes>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

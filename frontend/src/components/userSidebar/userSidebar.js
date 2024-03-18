@@ -8,8 +8,9 @@ import FontDownloadOutlinedIcon from "@mui/icons-material/FontDownloadOutlined";
 import AbcOutlinedIcon from "@mui/icons-material/AbcOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { List, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import { useEffect, useState } from "react";
 
-const AdminSidebar = () => {
+const UserSidebar = () => {
   const location = useLocation();
   const { logOut } = UserAuth();
   const handleSignOut = async () => {
@@ -19,8 +20,25 @@ const AdminSidebar = () => {
       console.log(error);
     }
   };
+  const [isSidebarFixed, setIsSidebarFixed] = useState(false);
+
+  useEffect(() => {
+    function handleScroll() {
+      if (window.scrollY > 0.5) { // Adjust the scroll position as needed
+        setIsSidebarFixed(true);
+      } else {
+        setIsSidebarFixed(false);
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
-    <div className={style.sidebar}>
+    <div className={isSidebarFixed ? `${style.sidebar} ${style.fixed}` : style.sidebar}>
       <div className={style.logo}>
         <center>
           <img src={logo} alt="logo" />
@@ -59,4 +77,4 @@ const AdminSidebar = () => {
      </div>
   );
 };
-export default AdminSidebar;
+export default UserSidebar;
