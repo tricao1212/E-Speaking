@@ -10,16 +10,17 @@ const Profile = () => {
   const { user } = UserAuth();
   const [avatar, setAvatar] = useState(user.avatar);
   const [level, setLevel] = useState("");
-  const fetchData = () => {
-    axios
-      .get("https://localhost:7149/api/point/" + user.point)
-      .then((response) => {
-        setLevel(response.data);
-      });
-  };
+  const [point, setPoint] = useState(0);
 
   useEffect(() => {
-    fetchData();
+    axios.get("https://localhost:7149/api/auth/"+user.uid)
+    .then((response)=> {
+      setLevel(response.data.level.type)
+      setPoint(response.data.point)
+    })
+    .catch((e)=> {
+      alert(e)
+    })
   }, []);
 
   const onDrop = (acceptedFiles) => {
@@ -55,7 +56,7 @@ const Profile = () => {
           </div>
         )}
       </div>
-      <h2>Point: <span className={style.color}>{user.point}</span></h2>
+      <h2>Point: <span className={style.color}>{point}</span></h2>
       <div className={style.block}>
         <h4>Name: {user.name}</h4>
       </div>

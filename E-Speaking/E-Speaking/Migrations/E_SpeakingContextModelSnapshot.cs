@@ -122,6 +122,9 @@ namespace E_Speaking.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("LevelId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -132,6 +135,8 @@ namespace E_Speaking.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("UID");
+
+                    b.HasIndex("LevelId");
 
                     b.ToTable("User");
                 });
@@ -175,6 +180,17 @@ namespace E_Speaking.Migrations
                         .IsRequired();
 
                     b.Navigation("Lesson");
+                });
+
+            modelBuilder.Entity("E_Speaking.Models.User", b =>
+                {
+                    b.HasOne("E_Speaking.Models.Level", "Level")
+                        .WithMany()
+                        .HasForeignKey("LevelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Level");
                 });
 
             modelBuilder.Entity("E_Speaking.Models.Word", b =>

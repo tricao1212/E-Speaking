@@ -5,9 +5,10 @@ import Learn from "../learn/Learn";
 import { Routes, Route } from "react-router-dom";
 import UserSidebar from "../../../components/userSidebar/userSidebar";
 import style from "./HomeUserCss.module.css";
-import Profile from "../profile/Profile";
+
 import Lessons from "../study/Lessons";
 import Ranking from "../ranking/Ranking";
+import Profile from "../profile/Profile";
 
 
 function HomeUser() {

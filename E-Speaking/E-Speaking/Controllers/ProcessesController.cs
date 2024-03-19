@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using E_Speaking.Data;
 using E_Speaking.Models;
+using System.Drawing;
 
 namespace E_Speaking.Controllers
 {
@@ -79,7 +80,8 @@ namespace E_Speaking.Controllers
         public async Task<ActionResult<Process>> PostProcess(Process process)
         {
             var user = await _context.User.FirstOrDefaultAsync(x => x.UID.Equals(process.UserUID));
-            var p = await _context.Process.FirstOrDefaultAsync(x=>x.LessonId==process.LessonId && x.UserUID.Equals(process.UserUID));
+            var p = await _context.Process.FirstOrDefaultAsync(x => x.LessonId == process.LessonId && x.UserUID.Equals(process.UserUID) && x.Type.Equals(process.Type));
+            var level = await _context.Level.OrderBy(x => x.RangePoint).ToListAsync();
             if (p != null)
             {
                 if (p.Progress < process.Progress)
@@ -87,7 +89,13 @@ namespace E_Speaking.Controllers
                     int temp = process.Progress - p.Progress;
                     p.Progress = process.Progress;
                     user.Point += temp;
-                    _context.User.Update(user);
+                    for (int i = 1; i < level.Count; i++)
+                    {
+                        if (user.Point >= level[i].RangePoint)
+                        {
+                            user.LevelId = level[i].Id;
+                        }
+                    }
                     p.AttemptTime = DateTime.Now;
                     _context.Process.Update(p);
                 }
@@ -95,11 +103,17 @@ namespace E_Speaking.Controllers
             else
             {
                 user.Point += process.Progress;
+                for (int i = 0; i < level.Count; i++)
+                {
+                    if (user.Point >= level[i].RangePoint)
+                    {
+                        user.LevelId = level[i].Id;
+                    }
+                }
                 process.AttemptTime = DateTime.Now;
-                _context.User.Update(user);
                 _context.Process.Add(process);
             }
-            
+            _context.User.Update(user);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetProcess", new { id = process.Id }, process);

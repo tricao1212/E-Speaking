@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace E_Speaking.Migrations
 {
     /// <inheritdoc />
-    public partial class @new : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -36,22 +36,6 @@ namespace E_Speaking.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Level", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "User",
-                columns: table => new
-                {
-                    UID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Avatar = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Role = table.Column<int>(type: "int", nullable: false),
-                    Point = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_User", x => x.UID);
                 });
 
             migrationBuilder.CreateTable(
@@ -95,6 +79,29 @@ namespace E_Speaking.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    UID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Avatar = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Role = table.Column<int>(type: "int", nullable: false),
+                    LevelId = table.Column<int>(type: "int", nullable: false),
+                    Point = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.UID);
+                    table.ForeignKey(
+                        name: "FK_User_Level_LevelId",
+                        column: x => x.LevelId,
+                        principalTable: "Level",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Process",
                 columns: table => new
                 {
@@ -127,6 +134,11 @@ namespace E_Speaking.Migrations
                 column: "LessonId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_User_LevelId",
+                table: "User",
+                column: "LevelId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Word_LessonId",
                 table: "Word",
                 column: "LessonId");
@@ -135,9 +147,6 @@ namespace E_Speaking.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Level");
-
             migrationBuilder.DropTable(
                 name: "Process");
 
@@ -152,6 +161,9 @@ namespace E_Speaking.Migrations
 
             migrationBuilder.DropTable(
                 name: "Lesson");
+
+            migrationBuilder.DropTable(
+                name: "Level");
         }
     }
 }

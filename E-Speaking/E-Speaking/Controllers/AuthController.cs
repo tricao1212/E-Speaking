@@ -26,14 +26,14 @@ namespace E_Speaking.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
-            return await _context.User.Include(x => x.Processes).ToListAsync();
+            return await _context.User.Include(x => x.Processes).Include(x=>x.Level).ToListAsync();
         }
 
         // GET: api/Auth/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(string id)
         {
-            var user = await _context.User.Include(x=>x.Processes).FirstOrDefaultAsync(x=>x.UID==id);
+            var user = await _context.User.Include(x=>x.Processes).Include(x=>x.Level).FirstOrDefaultAsync(x=>x.UID.Equals(id));
 
             if (user == null)
             {
@@ -49,7 +49,7 @@ namespace E_Speaking.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            var newUser = await _context.User.Include(x=>x.Processes).FirstOrDefaultAsync(x=>x.UID.Equals(user.UID));
+            var newUser = await _context.User.FirstOrDefaultAsync(x=>x.UID.Equals(user.UID));
             if (newUser == null)
             {
                 newUser = new User
@@ -58,7 +58,9 @@ namespace E_Speaking.Controllers
                     Email = user.Email,
                     Avatar = user.Avatar,
                     Name = user.Name,
-                    Role = 2
+                    Role = 2,
+                    LevelId = 1,
+                    Point = 0
                 };
                 _context.User.Add(newUser);
             }
