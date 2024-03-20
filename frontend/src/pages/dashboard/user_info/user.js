@@ -47,7 +47,9 @@ const Users = () => {
       avatar: user.avatar,
       email: user.email,
       name: user.name,
-      role: role
+      role: role,
+      levelId: user.levelId,
+      point: user.point
     }
     await axios.put("http://34.136.63.21/api/auth/"+user.uid, newRole)
       .then(()=>{

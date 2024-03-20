@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../images/logo2.png";
 import style from "./userSidebar.module.css";
 import { UserAuth } from "../../context/AuthContext";
@@ -49,19 +49,19 @@ const UserSidebar = () => {
         sx={{ width: '100%', bgcolor: '#F0F8FF' }}
         component="nav" aria-labelledby="nested-list-subheader"
         >
-          <ListItemButton as={NavLink} to={'/user/learn'} className={style.text} selected={location.pathname.includes("/user/learn")} >
+          <ListItemButton as={Link} to={'/user/learn'} className={style.text} selected={location.pathname.includes("/user/learn")} >
             <ListItemIcon>
               <HomeOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Learn" />
           </ListItemButton>
-          <ListItemButton as={NavLink}  to={'/user/profile'} className={style.text} selected={location.pathname.includes("/user/profile")}>
+          <ListItemButton as={Link}  to={'/user/profile'} className={style.text} selected={location.pathname.includes("/user/profile")}>
             <ListItemIcon>
               <FontDownloadOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Profile"  />
           </ListItemButton>
-          <ListItemButton as={NavLink} to={'/user/ranking'} className={style.text} selected={location.pathname.includes("/user/ranking")}>
+          <ListItemButton as={Link} to={'/user/ranking'} className={style.text} selected={location.pathname.includes("/user/ranking")}>
             <ListItemIcon>
               <AbcOutlinedIcon />
             </ListItemIcon>

@@ -13,7 +13,7 @@ const Profile = () => {
   const [point, setPoint] = useState(0);
 
   useEffect(() => {
-    axios.get("https://localhost:7149/api/auth/"+user.uid)
+    axios.get("http://34.136.63.21/api/auth/"+user.uid)
     .then((response)=> {
       setLevel(response.data.level.type)
       setPoint(response.data.point)
