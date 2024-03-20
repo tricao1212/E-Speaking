@@ -1,32 +1,19 @@
-.second{
-    border: 1px solid black;
-    height: 40vh;
-    border-radius: 10%;
-}
-.first{
-    border: 1px solid black;
-    height: 50vh;
-    border-radius: 10%;
-
-}
-
-.third{
-    border: 1px solid black;
-    height: 30vh;
-    border-radius: 10%;
-}
-
-.rankBoard{
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-end;
-}
 
 .rankTable{
-    border: 1px solid black;
-    border-radius: 10px;
+    padding: 20px;
     margin: 10vh 30vh 10vh 30vh;
 }
 .rankTable h2{
     text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border: 1px dashed black;
+    background-color: greenyellow;
+    width: 100%;
+}
+
+.font{
+    font-weight: bold;
 }

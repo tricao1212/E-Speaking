@@ -72,7 +72,6 @@ const Lessons = () => {
             </Card.Body>
           </Card>
         )})}
-          
       </div>
     </>
   );
