@@ -5,7 +5,7 @@ import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 function Learn() {
   return (
-    <>
+    <div className={LearnCss.learn}>
       <Card className={LearnCss.option}>
         <Card.Header className={LearnCss.card_header}>
           Practice with word
@@ -32,7 +32,7 @@ function Learn() {
           </Link>
         </Card.Body>
       </Card>
-    </>
+    </div>
   );
 }
 

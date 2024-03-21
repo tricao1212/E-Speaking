@@ -1,3 +1,6 @@
+.learn {
+    height: 100vh;
+}
 .option .btn{
     margin-top: 3rem;
     width: 10rem;
@@ -23,4 +26,9 @@
 
 .sentence{
     background-image: url('../../../images/word.png');
+}
+@media (max-width: 767.98px) {
+    .option {
+        width: 90%;
+    }
 }

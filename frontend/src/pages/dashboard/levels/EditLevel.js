@@ -9,11 +9,13 @@ const EditLevel = () => {
     const location = useLocation();
     const {data} = location.state;
     const [level, setLevel] = useState(data.type);
+    const [rangePoint, setRangePoint] = useState(data.rangePoint)
     const handleSubmit = (e) => {
         e.preventDefault();
         const newLevel = {
             id: data.id,
-            type: level
+            type: level,
+            rangePoint: rangePoint
         }
         axios.put("http://34.136.63.21/api/levels/"+data.id, newLevel)
         .then(response => {
@@ -41,6 +43,8 @@ const EditLevel = () => {
                 <Form.Group>
                     <Form.Label>Level</Form.Label>
                     <Form.Control type="text" value={level} placeholder="Enter a level" onChange={e=>setLevel(e.target.value)}/>
+                    <Form.Label>Range Point</Form.Label>
+                    <Form.Control type="text" onChange={e => setRangePoint(e.target.value)} placeholder="Enter a range point"/>
                     <span></span>
                 </Form.Group>
                 <Button type="submit">Update</Button>

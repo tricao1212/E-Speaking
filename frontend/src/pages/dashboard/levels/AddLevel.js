@@ -6,12 +6,14 @@ import { Bounce, toast } from "react-toastify";
 
 const AddLevel = () => {
     const [level, setLevel] = useState('');
+    const [rangePoint, setRangePoint] = useState('');
     const navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
         const newLevel= {
             id: 0,
-            type: level
+            type: level,
+            rangePoint
         }
         axios.post("http://34.136.63.21/api/levels", newLevel)
         .then(response=>{
@@ -36,6 +38,8 @@ const AddLevel = () => {
                 <Form.Group>
                     <Form.Label>Level</Form.Label>
                     <Form.Control type="text" onChange={e => setLevel(e.target.value)} placeholder="Enter a level"/>
+                    <Form.Label>Range Point</Form.Label>
+                    <Form.Control type="text" onChange={e => setRangePoint(e.target.value)} placeholder="Enter a range point"/>
                     <span></span>
                 </Form.Group>
                 <Button type="submit">Add</Button>

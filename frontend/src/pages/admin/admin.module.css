@@ -1,7 +1,29 @@
-.adminContent{
+.adminContent {
     padding-left: 0;
 }
-.headerAd{
+.overlay {
+    height: 100%;
+    width: 100%;
+    display: none;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    animation: fadeIn linear 0.3s;
+}
+.sidebarmobile {
+    transform: translateX(-100%);
+    transition: transform 0.5s;
+}
+.sidebarmobile.open {
+    transform: translateX(0%)
+}
+.overlay.open {
+    display: block;
+}
+
+.headerAd {
     padding: 0;
     height: 5rem;
     background-color: lightskyblue;
@@ -9,19 +31,53 @@
     align-items: center;
     justify-content: flex-end;
 }
-.sidebar{
-    padding: 0;
+
+.btnList {
+    display: none;
 }
-.content{
+
+.sidebar {
     padding: 0;
 }
 
-.adminAva{
+.content {
+    padding: 0;
+}
+
+.adminAva {
     display: flex;
     font-size: x-large;
     padding-right: 24px;
 }
 
-.adminAva .avatar{
+.adminAva .avatar {
     margin-right: 2vh;
+}
+
+@media (max-width: 767.98px) {
+    .name {
+        display: none;
+    }
+
+    .headerAd {
+        justify-content: space-between;
+    }
+
+    .btnList {
+        display: block;
+        padding: 24px;
+
+    }
+
+    .adminAva .avatar {
+        margin-right: 0;
+    }
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

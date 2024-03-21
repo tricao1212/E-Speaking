@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../images/logo2.png";
-import style from "./usersidebar.module.css";
+import style from "./userSidebar.module.css";
 import { UserAuth } from "../../context/AuthContext";
 import Button from "@mui/material/Button";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -20,25 +20,9 @@ const UserSidebar = () => {
       console.log(error);
     }
   };
-  const [isSidebarFixed, setIsSidebarFixed] = useState(false);
 
-  useEffect(() => {
-    function handleScroll() {
-      if (window.scrollY > 0.5) {
-        setIsSidebarFixed(true);
-      } else {
-        setIsSidebarFixed(false);
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
   return (
-    <div className={isSidebarFixed ? `${style.sidebar} ${style.fixed}` : style.sidebar}>
+    <div className={style.sidebar}>
       <div className={style.logo}>
         <center>
           <img src={logo} alt="logo" />

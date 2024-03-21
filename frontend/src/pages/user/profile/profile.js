@@ -21,7 +21,7 @@ const Profile = () => {
     .catch((e)=> {
       alert(e)
     })
-  }, []);
+  }, [user]);
 
   const onDrop = (acceptedFiles) => {
     const file = acceptedFiles[0];

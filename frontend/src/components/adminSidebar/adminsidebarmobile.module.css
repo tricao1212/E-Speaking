@@ -7,9 +7,18 @@
     margin-bottom: 3vh;
 }
 .sidebar{
-    position: relative;
+    position: fixed;
+    z-index: 20;
     height: 100vh;
     background-color: aliceblue;
+    width: 60%;
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: transform linear 0.3s, opacity linear 0.3s
+}
+.sidebar.open {
+    transform : translateX(0%);
+    opacity: 1;
 }
 .option button{
     display: flex;
@@ -26,9 +35,6 @@
     margin-right: 3px;
     font-size: 35px !important;
 }
-.option{
-    padding-left: 10px;
-}
 
 .text{
     text-decoration: none;
@@ -37,10 +43,5 @@
 
 .sidebar .logOut{
     position: absolute;
-    bottom: 16px;
-}
-@media (max-width: 767.98px) {
-    .sidebar {
-        display: none;
-    }
+    bottom: 10px;
 }

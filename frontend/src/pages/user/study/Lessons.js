@@ -30,7 +30,7 @@ const Lessons = () => {
       setProcesses(response.data.processes.filter(p => p.type.includes(type)))
     })
     .catch((e) => console.log(e));
-  }, []);
+  }, [type, user]);
   const handleClick = (item) => {
     navigate("/study", { state: { lessonId: item, type: type } });
   };
@@ -39,7 +39,7 @@ const Lessons = () => {
   };
 
   const render = (
-    <>
+    <div className={style.layout}>
       <div className={style.back}>
         <Button
           variant="outlined"
@@ -74,7 +74,7 @@ const Lessons = () => {
         )})}
           
       </div>
-    </>
+    </div>
   );
   return <>{isLoading ? <Spinner /> : render}</>;
 };

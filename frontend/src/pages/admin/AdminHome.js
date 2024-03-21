@@ -26,32 +26,33 @@ const AdminHome = () => {
   return (
     <Container className={style.content}>
       <Row>
-        <Col className={style.card} md={5}>
-          <Card>
-            <Card.Header className={style.cardHead}>Word</Card.Header>
-            <Card.Body>Total words: {words}</Card.Body>
-          </Card>
+        <Col className={style.card} md={6}>
+            <Card>
+              <Card.Header className={style.cardHead}>Word</Card.Header>
+              <Card.Body>Total words: {words}</Card.Body>
+            </Card>
         </Col>
-        <Col className={style.card} md={5}>
+        <Col className={style.card} md={6}>
           <Card>
             <Card.Header className={style.cardHead} >Sentence</Card.Header>
             <Card.Body>Total sentences: {sentences}</Card.Body>
           </Card>
         </Col>
-      </Row>
-      <Row>
-        <Col className={style.card} md={5}>
+        <Col className={style.card} md={6}>
           <Card>
             <Card.Header className={style.cardHead} >Lesson</Card.Header>
             <Card.Body>Total lessons: {lessons}</Card.Body>
           </Card>
         </Col>
-        <Col className={style.card} md={5}>
+        <Col className={style.card} md={6}>
           <Card>
             <Card.Header className={style.cardHead} >User</Card.Header>
             <Card.Body>Total users: {noOfUsers}</Card.Body>
           </Card>
         </Col>
+      </Row>
+      <Row>
+        
       </Row>
     </Container>
   );

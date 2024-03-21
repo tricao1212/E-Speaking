@@ -1,6 +1,7 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 import AdminSidebar from "../../components/adminSidebar/AdminSidebar";
+import AdminSidebarMobile from "../../components/adminSidebar/AdminSidebarMobile";
 import { Route, Routes } from "react-router-dom";
 import Words from "../dashboard/words/Words";
 import Sentences from "../dashboard/sentences/Sentences";
@@ -19,13 +20,26 @@ import EditLevel from "../dashboard/levels/EditLevel";
 import Avatar from "@mui/material/Avatar";
 import Users from "../dashboard/user_info/User";
 import { UserAuth } from "../../context/AuthContext";
+import MenuIcon from '@mui/icons-material/Menu';
+import { IconButton } from "@mui/material";
+import { useState } from "react";
 
 const Admin = () => {
   const { user } = UserAuth();
+  const [isOpen, setIsOpen] = useState(false);
+  const openNav = () => {
+    setIsOpen(true);
+  };
+  const handleSwitch =() => {
+    setIsOpen(false);
+  }
   return (
     <div>
       <ToastContainer />
       <main>
+        <div className={`${style.overlay} ${isOpen ? style.open : ''}`} onClick={handleSwitch}>
+        </div>
+        <AdminSidebarMobile isOpen={isOpen} onSwitch={handleSwitch} />
         <Container className={style.adminContent} fluid>
           <Row>
             <Col className={style.sidebar} md={2}>
@@ -33,9 +47,14 @@ const Admin = () => {
             </Col>
             <Col className={style.content} md={10}>
               <div className={style.headerAd}>
+                <div className={style.btnList}>
+                  <IconButton onClick={openNav}>
+                    <MenuIcon/>
+                  </IconButton>
+                  </div>
                 <div className={style.adminAva}>
                   <Avatar className={style.avatar} src={user.avatar} />
-                  {user.name}
+                  <div className={style.name}>{user.name}</div>
                 </div>
               </div>
               <Routes>

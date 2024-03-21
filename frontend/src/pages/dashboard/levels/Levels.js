@@ -90,6 +90,7 @@ const Levels = () => {
             <tr>
               <th>#</th>
               <th>Name</th>
+              <th>Range Point</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -98,6 +99,7 @@ const Levels = () => {
               <tr key={item.id}>
                 <td>{index + 1}</td>
                 <td>{item.type}</td>
+                <td>{item.rangePoint}</td>
                 <td>
                   <IconButton color="primary" aria-label="edit" onClick={()=>navigate("../levels/edit",{state: { data: item }})}>
                     <EditIcon/>
