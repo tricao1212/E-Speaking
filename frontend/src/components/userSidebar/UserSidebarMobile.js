@@ -1,64 +1,38 @@
-import { Link, useLocation } from "react-router-dom";
-import logo from "../../images/logo2.png";
-import style from "./userSidebar.module.css";
-import { UserAuth } from "../../context/AuthContext";
-import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
+import style from "./usersidebarmobile.module.css";
+// import { UserAuth } from "../../context/AuthContext";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import FontDownloadOutlinedIcon from "@mui/icons-material/FontDownloadOutlined";
 import AbcOutlinedIcon from "@mui/icons-material/AbcOutlined";
-import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import { List, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
-import { useEffect, useState } from "react";
+import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
+import { useState } from "react";
 
 const UserSidebar = () => {
-  const location = useLocation();
-  const { logOut } = UserAuth();
-  const handleSignOut = async () => {
-    try {
-      await logOut();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+  const [value, setValue] = useState(0);
+  // const { logOut } = UserAuth();
+  // const handleSignOut = async () => {
+  //   try {
+  //     await logOut();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   return (
     <div className={style.sidebar}>
-      <div className={style.logo}>
-        <center>
-          <img src={logo} alt="logo" />
-        </center>
-      </div>
-      <div className={style.option}>
-        <List
-        sx={{ width: '100%', bgcolor: '#F0F8FF' }}
-        component="nav" aria-labelledby="nested-list-subheader"
+      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+        <BottomNavigation
+          showLabels
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
         >
-          <ListItemButton as={Link} to={'/user/learn'} className={style.text} selected={location.pathname.includes("/user/learn")} >
-            <ListItemIcon>
-              <HomeOutlinedIcon />
-            </ListItemIcon>
-            <ListItemText primary="Learn" />
-          </ListItemButton>
-          <ListItemButton as={Link}  to={'/user/profile'} className={style.text} selected={location.pathname.includes("/user/profile")}>
-            <ListItemIcon>
-              <FontDownloadOutlinedIcon />
-            </ListItemIcon>
-            <ListItemText primary="Profile"  />
-          </ListItemButton>
-          <ListItemButton as={Link} to={'/user/ranking'} className={style.text} selected={location.pathname.includes("/user/ranking")}>
-            <ListItemIcon>
-              <AbcOutlinedIcon />
-            </ListItemIcon>
-            <ListItemText primary="Ranking" />
-          </ListItemButton>
-        </List>
-        <div className={style.logOut}>
-          <Button startIcon={<LogoutOutlinedIcon />} onClick={handleSignOut}>
-            Log Out
-          </Button>
-        </div>
-      </div>
-     </div>
+          <BottomNavigationAction component={Link} to="/user/learn" label="Learn" icon={<HomeOutlinedIcon />} />
+          <BottomNavigationAction component={Link} to="/user/profile" label="Profile" icon={<FontDownloadOutlinedIcon />} />
+          <BottomNavigationAction component={Link} to="/user/ranking" label="Ranking" icon={<AbcOutlinedIcon />} />
+        </BottomNavigation>
+      </Paper>
+    </div>
   );
 };
 export default UserSidebar;

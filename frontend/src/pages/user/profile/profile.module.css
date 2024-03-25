@@ -1,3 +1,6 @@
+.layout {
+    height: 100vh;
+}
 .centerBlock{
     display: block;
     margin: auto;
@@ -39,4 +42,10 @@
 
 .color{
     color: green;
+}
+@media (max-width: 767.98px) {
+    .centerBlock {
+        width: 80%;
+        height: 60vh;
+    }
 }

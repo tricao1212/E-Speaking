@@ -4,6 +4,7 @@ import Col from "react-bootstrap/Col";
 import Learn from "../learn/Learn";
 import { Routes, Route } from "react-router-dom";
 import UserSidebar from "../../../components/userSidebar/UserSidebar";
+import UserSidebarMobile from "../../../components/userSidebar/UserSidebarMobile";
 import style from "./HomeUserCss.module.css";
 
 import Lessons from "../study/Lessons";
@@ -14,6 +15,7 @@ import Profile from "../profile/Profile";
 function HomeUser() {
   return (
     <main>
+      <UserSidebarMobile />
       <Container fluid>
         <Row>
           <Col className={style.sidebar} md={2}>

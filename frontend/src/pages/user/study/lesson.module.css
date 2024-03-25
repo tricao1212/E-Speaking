@@ -1,11 +1,9 @@
 .layout {
-    height: 100vh;
+    height: fit-content;
 }
 .card{
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 3rem;
+    margin: 3rem auto;
     width: 50%;
 }
 .back{
@@ -19,6 +17,9 @@
     margin-bottom: 20px;
 }
 @media (max-width: 767.98px) {
+    .layout {
+        height: 100vh;
+    }
     .card {
         width: 90%
     }

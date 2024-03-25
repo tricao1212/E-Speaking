@@ -35,33 +35,35 @@ const Profile = () => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
-    <div className={style.centerBlock}>
-      <h2>Level: <span className={style.color}>{level}</span> </h2>
-      <div {...getRootProps()} className={style.dropzone}>
-        <input {...getInputProps()} />
-        {isDragActive ? (
-          <p>Drop image here...</p>
-        ) : (
-          <p>Drag and drop photos or click to select photos.</p>
-        )}
-        {avatar && (
-          <div className={style.avatar_preview}>
-            <center>
-              <Avatar
-                sx={{ width: 100, height: 100 }}
-                className={style.avatar_image}
-                src={avatar}
-              />
-            </center>
-          </div>
-        )}
-      </div>
-      <h2>Point: <span className={style.color}>{point}</span></h2>
-      <div className={style.block}>
-        <h4>Name: {user.name}</h4>
-      </div>
-      <div className={style.block}>
-        <h4>Email: {user.email}</h4>
+    <div className={style.layout}>
+      <div className={style.centerBlock}>
+        <h2>Level: <span className={style.color}>{level}</span> </h2>
+        <div {...getRootProps()} className={style.dropzone}>
+          <input {...getInputProps()} />
+          {isDragActive ? (
+            <p>Drop image here...</p>
+          ) : (
+            <p>Drag and drop photos or click to select photos.</p>
+          )}
+          {avatar && (
+            <div className={style.avatar_preview}>
+              <center>
+                <Avatar
+                  sx={{ width: 100, height: 100 }}
+                  className={style.avatar_image}
+                  src={avatar}
+                />
+              </center>
+            </div>
+          )}
+        </div>
+        <h2>Point: <span className={style.color}>{point}</span></h2>
+        <div className={style.block}>
+          <h4>Name: {user.name}</h4>
+        </div>
+        <div className={style.block}>
+          <h4>Email: {user.email}</h4>
+        </div>
       </div>
     </div>
   );

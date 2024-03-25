@@ -40,31 +40,31 @@ const AdminSidebar = () => {
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItemButton>
-          <ListItemButton as={Link}  to={'/admin/words'} className={style.text} selected={location.pathname.includes("/admin/words")}>
+          <ListItemButton component={Link}  to={'/admin/words'} className={style.text} selected={location.pathname.includes("/admin/words")}>
             <ListItemIcon>
               <FontDownloadOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Words"  />
           </ListItemButton>
-          <ListItemButton as={Link} to={'/admin/sentences'} className={style.text} selected={location.pathname.includes("/admin/sentences")}>
+          <ListItemButton component={Link} to={'/admin/sentences'} className={style.text} selected={location.pathname.includes("/admin/sentences")}>
             <ListItemIcon>
               <AbcOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Sentences" />
           </ListItemButton>
-          <ListItemButton as={Link} to={'/admin/lessons'} className={style.text} selected={location.pathname.includes("/admin/lessons")}>
+          <ListItemButton component={Link} to={'/admin/lessons'} className={style.text} selected={location.pathname.includes("/admin/lessons")}>
             <ListItemIcon>
               <LibraryBooksOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Lessons" />
           </ListItemButton>
-          <ListItemButton as={Link} to={'/admin/levels'} className={style.text} selected={location.pathname.includes("/admin/levels")}>
+          <ListItemButton component={Link} to={'/admin/levels'} className={style.text} selected={location.pathname.includes("/admin/levels")}>
             <ListItemIcon>
               <ScienceIcon />
             </ListItemIcon>
             <ListItemText primary="Level" />
           </ListItemButton>
-          <ListItemButton as={Link} to={'/admin/users'} className={style.text} selected={location.pathname === "/admin/users"}>
+          <ListItemButton componnent={Link} to={'/admin/users'} className={style.text} selected={location.pathname === "/admin/users"}>
             <ListItemIcon>
               <PersonPinOutlinedIcon />
             </ListItemIcon>

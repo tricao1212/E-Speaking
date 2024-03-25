@@ -21,14 +21,13 @@ const Ranking = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  console.log(allUser);
 
   return (
-    <>
+    <div className={style.layout}>
       <div className={style.rankTable}>
         <h2>Ranking table</h2>
         <TableContainer component={Paper}>
-          <Table>
+          <Table sx={{maxWidth: 750}}>
             <TableHead>
               <TableRow>
                 <TableCell>Top</TableCell>
@@ -55,7 +54,7 @@ const Ranking = () => {
           </Table>
         </TableContainer>
       </div>
-    </>
+    </div>
   );
 };
 
